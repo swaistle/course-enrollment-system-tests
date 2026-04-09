@@ -1,0 +1,26 @@
+package ces.tests;
+
+import io.restassured.RestAssured;
+import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
+import org.junit.jupiter.api.Test;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+public class StatusTests {
+    private static final Logger LOG = LoggerFactory.getLogger(StatusTests.class);
+    private static final String APP_URL = System.getenv("APP_URL") + "/status";
+
+    private final RequestSpecification request = RestAssured.given();
+    private Response response;
+
+    @Test
+    void assertStatus() {
+        LOG.debug("Asserting status of url: {}", APP_URL);
+
+        response = request.get(APP_URL);
+        response.then().assertThat().statusCode(200);
+    }
+
+}
