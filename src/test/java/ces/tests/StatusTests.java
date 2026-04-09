@@ -8,6 +8,8 @@ import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import static org.hamcrest.Matchers.equalTo;
+
 public class StatusTests {
     private static final Logger LOG = LoggerFactory.getLogger(StatusTests.class);
     private static final String APP_URL = System.getenv("APP_URL") + "/status";
@@ -22,5 +24,13 @@ public class StatusTests {
         response = request.get(APP_URL);
         response.then().assertThat().statusCode(200);
     }
+
+    @Test
+    void assertStatusBody() {
+        LOG.debug("Asserting body of url: {}", APP_URL);
+        response = request.get(APP_URL);
+        response.then().assertThat().body("status", equalTo("Server is running"));
+    }
+
 
 }
