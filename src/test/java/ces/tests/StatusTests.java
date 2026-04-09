@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 import static org.hamcrest.Matchers.equalTo;
 
 public class StatusTests {
@@ -22,15 +23,28 @@ public class StatusTests {
         LOG.debug("Asserting status of url: {}", APP_URL);
 
         response = request.get(APP_URL);
-        response.then().assertThat().statusCode(200);
+        response.then()
+                .assertThat()
+                .statusCode(200);
     }
 
     @Test
     void assertStatusBody() {
         LOG.debug("Asserting body of url: {}", APP_URL);
+
         response = request.get(APP_URL);
-        response.then().assertThat().body("status", equalTo("Server is running"));
+        response.then()
+                .assertThat()
+                .body("status", equalTo("Server is running"));
     }
 
+    @Test
+    void assertStatusSchema() {
+        LOG.debug("Asserting schema of url: {}", APP_URL);
 
+        response = request.get(APP_URL);
+        response.then()
+                .assertThat()
+                .body(matchesJsonSchemaInClasspath("schemas/StatusSchema.json"));
+    }
 }
