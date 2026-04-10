@@ -1,8 +1,7 @@
-package ces.tests.instructor;
-
-import io.restassured.response.Response;
+package ces.tests.student;
 
 import ces.utils.BearerTokenGenerator;
+import io.restassured.response.Response;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,16 +9,15 @@ import org.slf4j.LoggerFactory;
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 
 
-public class InstructorAuthenticationTests {
+public class StudentAuthenticationTests {
 
-    private static final Logger LOG = LoggerFactory.getLogger(InstructorAuthenticationTests.class);
+    private static final Logger LOG = LoggerFactory.getLogger(StudentAuthenticationTests.class);
     private final Response response = BearerTokenGenerator
-            .generateBearerToken("instructor");
+            .generateBearerToken("student");
 
     @Test
     void assertLoginStatus() {
         LOG.debug("Executing assertLoginStatus test");
-
         response.then()
                 .assertThat()
                 .statusCode(200);
