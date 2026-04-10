@@ -11,18 +11,18 @@ import org.slf4j.LoggerFactory;
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 import static org.hamcrest.Matchers.equalTo;
 
-public class StatusTests {
-    private static final Logger LOG = LoggerFactory.getLogger(StatusTests.class);
-    private static final String APP_URL = System.getenv("APP_URL") + "/status";
+class StatusTests {
+    private final Logger log = LoggerFactory.getLogger(StatusTests.class);
+    private final String appUrl = System.getenv("APP_URL") + "/status";
 
     private final RequestSpecification request = RestAssured.given();
     private Response response;
 
     @Test
     void assertStatus() {
-        LOG.debug("Asserting status of url: {}", APP_URL);
+        log.debug("Asserting status of url: {}", appUrl);
 
-        response = request.get(APP_URL);
+        response = request.get(appUrl);
         response.then()
                 .assertThat()
                 .statusCode(200);
@@ -30,9 +30,9 @@ public class StatusTests {
 
     @Test
     void assertStatusBody() {
-        LOG.debug("Asserting body of url: {}", APP_URL);
+        log.debug("Asserting body of url: {}", appUrl);
 
-        response = request.get(APP_URL);
+        response = request.get(appUrl);
         response.then()
                 .assertThat()
                 .body("status", equalTo("Server is running"));
@@ -40,9 +40,9 @@ public class StatusTests {
 
     @Test
     void assertStatusSchema() {
-        LOG.debug("Asserting schema of url: {}", APP_URL);
+        log.debug("Asserting schema of url: {}", appUrl);
 
-        response = request.get(APP_URL);
+        response = request.get(appUrl);
         response.then()
                 .assertThat()
                 .body(matchesJsonSchemaInClasspath("schemas/StatusSchema.json"));
