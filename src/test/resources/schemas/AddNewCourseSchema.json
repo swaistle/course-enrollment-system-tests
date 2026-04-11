@@ -1,0 +1,63 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Add New Course Schema",
+  "type": "object",
+  "properties": {
+    "message": {
+      "type": "string"
+    },
+    "newCourse": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "instructor": {
+          "type": "string"
+        },
+        "courseCode": {
+          "type": "string"
+        },
+        "category": {
+          "type": "string"
+        },
+        "totalCapacity": {
+          "type": "number"
+        },
+        "availableSlots": {
+          "type": "number"
+        },
+        "startDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "endDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "_id": {
+          "type": "string"
+        },
+        "__v": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "title",
+        "instructor",
+        "courseCode",
+        "category",
+        "totalCapacity",
+        "availableSlots",
+        "startDate",
+        "endDate",
+        "_id",
+        "__v"
+      ]
+    }
+  },
+  "required": [
+    "message",
+    "newCourse"
+  ]
+}
