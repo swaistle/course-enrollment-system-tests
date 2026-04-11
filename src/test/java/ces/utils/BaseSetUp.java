@@ -1,6 +1,7 @@
 package ces.utils;
 
 import io.restassured.RestAssured;
+import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 
@@ -42,7 +43,7 @@ public class BaseSetUp {
         return requestBody;
     }
 
-    public void setTestSetUp(){
+    public Response createCourse(){
         RequestSpecification request = RestAssured.given();
 
         final String appUrl = Helper.HOST + "/courses";
@@ -51,18 +52,23 @@ public class BaseSetUp {
 
         log.debug("Setting up course test data with courseCode: {}", courseCode);
 
-        Response response = request.body(courseRequestBody())
+        return request.body(courseRequestBody())
                 .accept("*/*")
                 .contentType("application/json")
                 .header("Authorization", "Bearer " + accessToken)
                 .when()
                 .post(appUrl);
-
-        courseId = response.then().extract().path("_id");
-        log.debug("Course id created: {}", courseId);
     }
 
-    public void clearDown(String courseId){
+    public String extractCourseId(Response response) {
+        JsonPath jsonPath = response.jsonPath();
+        courseId = jsonPath.getString("newCourse._id");
+        log.debug("actualCourse id: {}", courseId);
+
+        return courseId;
+    }
+
+    public void deleteCourse(String courseId){
         RequestSpecification request = RestAssured.given();
 
         final String appUrl = Helper.HOST + "/courses/" + courseId;
