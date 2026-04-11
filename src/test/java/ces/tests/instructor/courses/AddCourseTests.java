@@ -1,43 +1,56 @@
 package ces.tests.instructor.courses;
 
-import ces.utils.TestSetUp;
-import org.junit.jupiter.api.BeforeEach;
+import ces.utils.BaseSetUp;
+import ces.utils.BearerTokenGenerator;
+import ces.utils.Helper;
+import io.restassured.RestAssured;
+import io.restassured.path.json.JsonPath;
+import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.time.LocalDate;
-import java.util.HashMap;
-import java.util.Map;
 
 class AddCourseTests {
 
     private final Logger log = LoggerFactory.getLogger(AddCourseTests.class);
-
-    private final TestSetUp testSetUp = new TestSetUp();
+    BaseSetUp baseSetUp = new BaseSetUp();
+    BearerTokenGenerator bearerTokenGenerator = new BearerTokenGenerator();
 
     final String role = "instructor";
-    String courseId;
+    String actualCourseId;
 
-    @BeforeEach
-    void setTestSetUp(){
-        final String CANDIDATE_ID = System.getenv("CANDIDATE_ID");
 
-        final String username = role + "_" + CANDIDATE_ID + CANDIDATE_ID;
+    @AfterEach
+    void tearDown() {
+        log.debug("Running clear down");
+        baseSetUp.clearDown(actualCourseId);
+    }
 
-        LocalDate localDate = LocalDate.now();
+    @Test
+    void assertAddCourseStatus() {
+        RequestSpecification request = RestAssured.given();
 
-        Map<String, String> requestBody = new HashMap<>();
-        requestBody.put("title", username + " course");
-        requestBody.put("instructor", username);
-        requestBody.put("courseCode", "TST123");
-        requestBody.put("category", "Testing");
-        requestBody.put("totalCapacity", String.valueOf(30));
-        requestBody.put("startDate", localDate.toString());
-        requestBody.put("endDate", localDate.plusMonths(3).toString());
+        final String appUrl = Helper.HOST + "/courses";
 
-        courseId = testSetUp.createCourse(role, requestBody);
-        log.debug("Setting course id {}", courseId);
+        final String accessToken = bearerTokenGenerator.extractBearerToken(role);
 
+        Response response = request.body(baseSetUp.courseRequestBody())
+                .accept("*/*")
+                .contentType("application/json")
+                .header("Authorization", "Bearer " + accessToken)
+                .when()
+                .post(appUrl);
+
+        response.then()
+                .assertThat()
+                .statusCode(201);
+
+        JsonPath jsonPath = response.jsonPath();
+        actualCourseId = jsonPath.getString("newCourse._id");
+        log.debug("actualCourse id: {}", actualCourseId);
     }
 
 }

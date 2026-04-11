@@ -16,9 +16,9 @@ public class BearerTokenGenerator {
 
     public Response generateBearerToken(String role) {
         //Environment variables
-        final String appUrl = System.getenv("APP_URL") + "/" + role + "/login";
-        final String candidateId = System.getenv("CANDIDATE_ID");
-        final String password = System.getenv("PASSWORD");
+        final String appUrl = Helper.HOST + "/" + role + "/login";
+        final String candidateId = Helper.CANDIDATE_ID;
+        final String password = Helper.PASSWORD;
 
         final String username = role + "_" + candidateId + candidateId;
 

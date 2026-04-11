@@ -1,5 +1,6 @@
 package ces.tests;
 
+import ces.utils.Helper;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
@@ -13,7 +14,7 @@ import static org.hamcrest.Matchers.equalTo;
 
 class StatusTests {
     private final Logger log = LoggerFactory.getLogger(StatusTests.class);
-    private final String appUrl = System.getenv("APP_URL") + "/status";
+    private final String appUrl = Helper.HOST + "/status";
 
     private final RequestSpecification request = RestAssured.given();
     private Response response;
