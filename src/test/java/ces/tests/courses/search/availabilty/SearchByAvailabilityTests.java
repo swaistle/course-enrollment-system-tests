@@ -10,6 +10,8 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
+
 class SearchByAvailabilityTests {
 
     BaseSetUp baseSetUp = new BaseSetUp();
@@ -40,12 +42,21 @@ class SearchByAvailabilityTests {
     }
 
     @Test
-    void assertSearchByTitleStatus(){
+    void assertSearchByAvailabilityStatus(){
         Response response = searchCourseRequest.searchByAvailability(getExistingCourseCode);
 
         response.then()
                 .assertThat()
                 .statusCode(200);
+    }
+
+    @Test
+    void assertSearchByAvailabilitySchema(){
+        Response response = searchCourseRequest.searchByAvailability(getExistingCourseCode);
+
+        response.then()
+                .assertThat()
+                .body(matchesJsonSchemaInClasspath("schemas/SearchCourseAvailabilitySchema.json"));
     }
 
 }
