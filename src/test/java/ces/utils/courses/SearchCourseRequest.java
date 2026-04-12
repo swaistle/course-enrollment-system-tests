@@ -15,20 +15,17 @@ public class SearchCourseRequest {
 
     private final Logger log = LoggerFactory.getLogger(SearchCourseRequest.class);
 
-
     BearerTokenGenerator bearerTokenGenerator = new BearerTokenGenerator();
 
-    public Response searchTitle(String role, String title){
+    public Response searchTitle(String title){
         RequestSpecification request = RestAssured.given();
 
         String appUrl = HOST + COURSE_CONTEXT_PATH + COURSE_TITLE_CONTEXT_PATH + title;
-        String accessToken = bearerTokenGenerator.extractBearerToken(role);
 
-        log.debug("Creating default course test data");
+        log.debug("Searching via title: {}", title);
 
         return request
                 .accept("*/*")
-                .header("Authorization", "Bearer " + accessToken)
                 .when()
                 .get(appUrl);
     }

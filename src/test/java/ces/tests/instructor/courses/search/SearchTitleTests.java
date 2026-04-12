@@ -38,19 +38,9 @@ class SearchTitleTests {
     }
 
     @Test
-    void assertInstructorSearchTitleStatus(){
+    void assertSearchTitleStatus(){
         String instructorId = "instructor_" + CANDIDATE_ID + CANDIDATE_ID;
-        Response response = searchCourseRequest.searchTitle("instructor", instructorId);
-
-        response.then()
-                .assertThat()
-                .statusCode(200);
-    }
-
-    @Test
-    void assertStudentSearchTitleStatus(){
-        String instructorId = "instructor_" + CANDIDATE_ID + CANDIDATE_ID;
-        Response response = searchCourseRequest.searchTitle("student", instructorId);
+        Response response = searchCourseRequest.searchTitle(instructorId);
 
         response.then()
                 .assertThat()
@@ -60,7 +50,7 @@ class SearchTitleTests {
     @Test
     void assertSearchTitleResultsSchema(){
         String instructorId = "instructor_" + CANDIDATE_ID + CANDIDATE_ID;
-        Response response = searchCourseRequest.searchTitle("instructor", instructorId);
+        Response response = searchCourseRequest.searchTitle(instructorId);
 
         response.then()
                 .assertThat()
@@ -69,7 +59,7 @@ class SearchTitleTests {
 
     @Test
     void assertSearchTitleNoResultsSchema(){
-        Response response = searchCourseRequest.searchTitle("instructor", "NoResults");
+        Response response = searchCourseRequest.searchTitle("NoResults");
 
         response.then()
                 .assertThat()
