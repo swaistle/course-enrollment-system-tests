@@ -25,6 +25,7 @@ class AddCourseTests {
     @Test
     void assertAddCourseStatus() {
         Response response = baseSetUp.createCourse();
+
         response.then()
                 .assertThat()
                 .statusCode(201);
