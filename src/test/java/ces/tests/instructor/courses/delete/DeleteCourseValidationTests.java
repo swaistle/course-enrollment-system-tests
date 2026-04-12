@@ -57,6 +57,27 @@ class DeleteCourseValidationTests {
     }
 
     @Test
+    void assertNotFound(){
+        String appUrl = HOST + COURSE_CONTEXT_PATH + "/000000000000000000000000";
+
+        RequestSpecification request = RestAssured.given();
+
+        Response response = request
+                .accept("*/*")
+                .header("Authorization", "Bearer " + accessToken)
+                .when()
+                .delete(appUrl);
+
+        String responseMessage = response.then()
+                .assertThat()
+                .statusCode(404)
+                .extract()
+                .path("error");
+
+        assertEquals(NOT_FOUND_ERROR_MESSAGE, responseMessage);
+    }
+
+    @Test
     void assertCannotDeleteDifferentInstructorCourse(){
         String appUrl = HOST + COURSE_CONTEXT_PATH + "/69db938b17414acde244b9fc";
 
