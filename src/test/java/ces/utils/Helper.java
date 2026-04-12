@@ -8,6 +8,7 @@ public class Helper {
     public static final String PASSWORD = System.getenv("PASSWORD");
 
     public static final String COURSE_CONTEXT_PATH = "/courses";
+    public static final String COURSE_ALL_CONTEXT_PATH = "/all";
     public static final String COURSE_TITLE_CONTEXT_PATH = "/title/";
     public static final String COURSE_INSTRUCTOR_CONTEXT_PATH = "/instructor/";
     public static final String COURSE_AVAILABILITY_CONTEXT_PATH = "/availability/";

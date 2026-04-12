@@ -12,6 +12,19 @@ public class SearchCourseRequest {
 
     private final Logger log = LoggerFactory.getLogger(SearchCourseRequest.class);
 
+    public Response searchAll(){
+        RequestSpecification request = RestAssured.given();
+
+        String appUrl = HOST + COURSE_CONTEXT_PATH + COURSE_ALL_CONTEXT_PATH;
+
+        log.debug("Searching all courses");
+
+        return request
+                .accept("*/*")
+                .when()
+                .get(appUrl);
+    }
+
     public Response searchByTitle(String title){
         RequestSpecification request = RestAssured.given();
 
