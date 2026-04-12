@@ -30,7 +30,20 @@ public class SearchCourseRequest {
 
         String appUrl = HOST + COURSE_CONTEXT_PATH + COURSE_INSTRUCTOR_CONTEXT_PATH + instructor;
 
-        log.debug("Searching via instructore: {}", instructor);
+        log.debug("Searching via instructor: {}", instructor);
+
+        return request
+                .accept("*/*")
+                .when()
+                .get(appUrl);
+    }
+
+    public Response searchByAvailability(String courseCode){
+        RequestSpecification request = RestAssured.given();
+
+        String appUrl = HOST + COURSE_CONTEXT_PATH + COURSE_AVAILABILITY_CONTEXT_PATH + courseCode;
+
+        log.debug("Searching via availability: {}", courseCode);
 
         return request
                 .accept("*/*")
