@@ -15,7 +15,6 @@ public class DeleteCourseRequest {
     final String role = "instructor";
     private final Logger log = LoggerFactory.getLogger(DeleteCourseRequest.class);
 
-
     BearerTokenGenerator bearerTokenGenerator = new BearerTokenGenerator();
 
     public Response deleteCourse(String actualCourseId){
@@ -32,8 +31,7 @@ public class DeleteCourseRequest {
                 .header("Authorization", "Bearer " + accessToken)
                 .when()
                 .delete(appUrl);
-
-        }
+    }
 
     public void cleanUp(String courseId) {
         log.debug("Running clear down");
