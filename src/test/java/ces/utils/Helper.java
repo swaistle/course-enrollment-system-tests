@@ -9,6 +9,7 @@ public class Helper {
 
     public static final String COURSE_CONTEXT_PATH = "/courses";
     public static final String COURSE_TITLE_CONTEXT_PATH = "/title/";
+    public static final String COURSE_INSTRUCTOR_CONTEXT_PATH = "/instructor/";
 
     public static final String DATE_ERROR_MESSAGE = "startDate must be before endDate";
     public static final String COURSE_CODE_ERROR_MESSAGE = "Course code already exists";
