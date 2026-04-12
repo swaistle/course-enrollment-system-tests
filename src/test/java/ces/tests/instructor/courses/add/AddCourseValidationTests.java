@@ -2,8 +2,11 @@ package ces.tests.instructor.courses.add;
 
 import ces.utils.AddCoursePayloadBuilder;
 import ces.utils.BaseSetUp;
+import ces.utils.Helper;
+import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
 import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
@@ -92,5 +95,27 @@ class AddCourseValidationTests {
 
         assertEquals(COURSE_REQUIRED_FIELDS_ERROR_MESSAGE, responseMessage);
     }
+
+    @Test
+    void assertNoAuthToken() {
+        RequestSpecification request = RestAssured.given();
+
+        final String appUrl = Helper.HOST + "/courses";
+
+        Response response = request
+                .accept("*/*")
+                .contentType("application/json")
+                .when()
+                .post(appUrl);
+
+        String responseMessage = response.then()
+                .assertThat()
+                .statusCode(401)
+                .extract()
+                .path("message");
+
+        assertEquals(NO_AUTH_ERROR_MESSAGE, responseMessage);
+    }
+
 
 }
