@@ -1,4 +1,4 @@
-package ces.tests.instructor.courses.search;
+package ces.tests.instructor.courses.search.title;
 
 
 import io.restassured.RestAssured;
