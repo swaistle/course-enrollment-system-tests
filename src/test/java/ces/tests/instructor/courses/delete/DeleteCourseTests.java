@@ -7,6 +7,8 @@ import io.restassured.response.Response;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
+
 class DeleteCourseTests {
 
     BaseSetUp baseSetUp = new BaseSetUp();
@@ -24,7 +26,7 @@ class DeleteCourseTests {
                 .statusCode(201);
 
         actualCourseId = baseSetUp.extractCourseId(response);
-    }
+}
 
     @Test
     void assertDeleteStatus(){
@@ -33,6 +35,15 @@ class DeleteCourseTests {
         response.then()
                 .assertThat()
                 .statusCode(200);
+    }
+
+    @Test
+    void assertDeleteSchema(){
+        Response response = deleteCourseRequest.deleteCourse(actualCourseId);
+
+        response.then()
+                .assertThat()
+                .body(matchesJsonSchemaInClasspath("schemas/DeleteCourseSchema.json"));
     }
 
 }
