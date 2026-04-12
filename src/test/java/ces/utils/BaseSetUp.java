@@ -1,5 +1,6 @@
 package ces.utils;
 
+import ces.utils.courses.AddCoursePayloadBuilder;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.json.JSONObject;

@@ -1,6 +1,9 @@
 package ces.tests.instructor.courses.update;
 
 import ces.utils.*;
+import ces.utils.courses.AddCourseRequest;
+import ces.utils.courses.DeleteCourseRequest;
+import ces.utils.courses.UpdateCourseRequest;
 import io.restassured.response.Response;
 import org.json.JSONObject;
 import org.junit.jupiter.api.AfterEach;

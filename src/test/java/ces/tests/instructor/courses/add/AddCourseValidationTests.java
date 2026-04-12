@@ -1,6 +1,9 @@
 package ces.tests.instructor.courses.add;
 
 import ces.utils.*;
+import ces.utils.courses.AddCoursePayloadBuilder;
+import ces.utils.courses.AddCourseRequest;
+import ces.utils.courses.DeleteCourseRequest;
 import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;

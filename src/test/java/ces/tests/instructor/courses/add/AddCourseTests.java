@@ -1,8 +1,8 @@
 package ces.tests.instructor.courses.add;
 
-import ces.utils.AddCourseRequest;
+import ces.utils.courses.AddCourseRequest;
 import ces.utils.BaseSetUp;
-import ces.utils.DeleteCourseRequest;
+import ces.utils.courses.DeleteCourseRequest;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;

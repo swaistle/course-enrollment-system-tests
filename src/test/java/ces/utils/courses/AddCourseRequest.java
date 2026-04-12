@@ -1,5 +1,8 @@
-package ces.utils;
+package ces.utils.courses;
 
+import ces.utils.BaseSetUp;
+import ces.utils.BearerTokenGenerator;
+import ces.utils.Helper;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
