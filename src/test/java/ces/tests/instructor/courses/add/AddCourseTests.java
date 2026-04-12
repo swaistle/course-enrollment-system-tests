@@ -1,6 +1,8 @@
 package ces.tests.instructor.courses.add;
 
+import ces.utils.AddCourseRequest;
 import ces.utils.BaseSetUp;
+import ces.utils.DeleteCourseRequest;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
@@ -13,17 +15,19 @@ class AddCourseTests {
 
     private final Logger log = LoggerFactory.getLogger(AddCourseTests.class);
     BaseSetUp baseSetUp = new BaseSetUp();
+    AddCourseRequest addCourseRequest = new AddCourseRequest();
+    DeleteCourseRequest deleteCourseRequest = new DeleteCourseRequest();
     String actualCourseId;
 
     @AfterEach
     void tearDown() {
         log.debug("Running clear down");
-        baseSetUp.deleteCourse(actualCourseId);
+        deleteCourseRequest.cleanUp(actualCourseId);
     }
 
     @Test
     void assertAddCourseStatus() {
-        Response response = baseSetUp.createCourse();
+        Response response = addCourseRequest.createCourse();
 
         response.then()
                 .assertThat()
@@ -34,7 +38,7 @@ class AddCourseTests {
 
         @Test
     void assertAddCourseSchema() {
-        Response response = baseSetUp.createCourse();
+        Response response = addCourseRequest.createCourse();
         response.then()
                 .assertThat()
                     .body(matchesJsonSchemaInClasspath("schemas/AddNewCourseSchema.json"));
