@@ -77,4 +77,27 @@ class DeleteCourseValidationTests {
         assertEquals(DELETE_FORBIDDEN_ERROR_MESSAGE, responseMessage);
     }
 
+    @Test
+    void assertStudentCannotDeleteCourse(){
+        String appUrl = HOST + COURSE_CONTEXT_PATH + "/69db938b17414acde244b9fc";
+
+        String studentAccessToken = bearerTokenGenerator.extractBearerToken("student");
+
+        RequestSpecification request = RestAssured.given();
+
+        Response response = request
+                .accept("*/*")
+                .header("Authorization", "Bearer " + studentAccessToken)
+                .when()
+                .delete(appUrl);
+
+        String responseMessage = response.then()
+                .assertThat()
+                .statusCode(403)
+                .extract()
+                .path("message");
+
+        assertEquals(DELETE_ACCESS_DENIED_ERROR_MESSAGE, responseMessage);
+    }
+
 }

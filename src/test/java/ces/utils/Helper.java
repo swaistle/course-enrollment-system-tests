@@ -18,5 +18,6 @@ public class Helper {
     public static final String NOT_FOUND_ERROR_MESSAGE = "Course not found";
     public static final String DELETE_COURSE_ERROR_MESSAGE = "Error deleting course";
     public static final String DELETE_FORBIDDEN_ERROR_MESSAGE = "Forbidden: you can only delete your own courses";
+    public static final String DELETE_ACCESS_DENIED_ERROR_MESSAGE = "Access denied: instructors only";
 
 }
