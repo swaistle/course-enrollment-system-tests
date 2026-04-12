@@ -1,4 +1,4 @@
-package ces.tests.instructor.courses.search;
+package ces.tests.instructor.courses.search.title;
 
 
 import io.restassured.RestAssured;
@@ -10,7 +10,7 @@ import static ces.utils.Helper.*;
 import static ces.utils.Helper.COURSE_TITLE_CONTEXT_PATH;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class SearchTitleValidationTests {
+class SearchByTitleValidationTests {
 
     @Test
     void assertBadRequest(){
