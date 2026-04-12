@@ -8,6 +8,7 @@ public class Helper {
     public static final String PASSWORD = System.getenv("PASSWORD");
 
     public static final String COURSE_CONTEXT_PATH = "/courses";
+    public static final String COURSE_TITLE_CONTEXT_PATH = "/title/";
 
     public static final String DATE_ERROR_MESSAGE = "startDate must be before endDate";
     public static final String COURSE_CODE_ERROR_MESSAGE = "Course code already exists";
@@ -19,5 +20,6 @@ public class Helper {
     public static final String DELETE_COURSE_ERROR_MESSAGE = "Error deleting course";
     public static final String DELETE_FORBIDDEN_ERROR_MESSAGE = "Forbidden: you can only delete your own courses";
     public static final String DELETE_ACCESS_DENIED_ERROR_MESSAGE = "Access denied: instructors only";
+    public static final String FETCH_COURSE_ERROR_MESSAGE = "Error fetching course";
 
 }
