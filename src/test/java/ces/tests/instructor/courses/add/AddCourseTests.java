@@ -1,4 +1,4 @@
-package ces.tests.instructor.courses;
+package ces.tests.instructor.courses.add;
 
 import ces.utils.BaseSetUp;
 import io.restassured.response.Response;
@@ -15,7 +15,6 @@ class AddCourseTests {
     BaseSetUp baseSetUp = new BaseSetUp();
     String actualCourseId;
 
-
     @AfterEach
     void tearDown() {
         log.debug("Running clear down");
@@ -25,6 +24,7 @@ class AddCourseTests {
     @Test
     void assertAddCourseStatus() {
         Response response = baseSetUp.createCourse();
+
         response.then()
                 .assertThat()
                 .statusCode(201);

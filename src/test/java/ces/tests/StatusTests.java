@@ -6,14 +6,10 @@ import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import org.junit.jupiter.api.Test;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 import static org.hamcrest.Matchers.equalTo;
 
 class StatusTests {
-    private final Logger log = LoggerFactory.getLogger(StatusTests.class);
     private final String appUrl = Helper.HOST + "/status";
 
     private final RequestSpecification request = RestAssured.given();
@@ -21,8 +17,6 @@ class StatusTests {
 
     @Test
     void assertStatus() {
-        log.debug("Asserting status of url: {}", appUrl);
-
         response = request.get(appUrl);
         response.then()
                 .assertThat()
@@ -31,8 +25,6 @@ class StatusTests {
 
     @Test
     void assertStatusBody() {
-        log.debug("Asserting body of url: {}", appUrl);
-
         response = request.get(appUrl);
         response.then()
                 .assertThat()
@@ -41,8 +33,6 @@ class StatusTests {
 
     @Test
     void assertStatusSchema() {
-        log.debug("Asserting schema of url: {}", appUrl);
-
         response = request.get(appUrl);
         response.then()
                 .assertThat()
