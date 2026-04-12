@@ -75,4 +75,22 @@ class AddCourseValidationTests {
         baseSetUp.deleteCourse(actualCourseId);
     }
 
+    @Test
+    void assertRequiredFields() {
+        JSONObject missingRequiredFields = new JSONObject();
+        missingRequiredFields.put("courseCode", "requireFieldTest");
+
+        log.debug("Creating course with missing required fields");
+
+        Response response = baseSetUp.createCourse(missingRequiredFields);
+
+        String responseMessage = response.then()
+                .assertThat()
+                .statusCode(400)
+                .extract()
+                .path("error");
+
+        assertEquals(COURSE_REQUIRED_FIELDS_ERROR_MESSAGE, responseMessage);
+    }
+
 }
