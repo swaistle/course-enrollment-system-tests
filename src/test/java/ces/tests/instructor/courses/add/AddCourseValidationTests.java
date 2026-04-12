@@ -117,5 +117,26 @@ class AddCourseValidationTests {
         assertEquals(NO_AUTH_ERROR_MESSAGE, responseMessage);
     }
 
+    @Test
+    void assertFailedAuthToken() {
+        RequestSpecification request = RestAssured.given();
+
+        final String appUrl = Helper.HOST + "/courses";
+
+        Response response = request
+                .accept("*/*")
+                .contentType("application/json")
+                .header("Authorization", "Bearer 123")
+                .when()
+                .post(appUrl);
+
+        String responseMessage = response.then()
+                .assertThat()
+                .statusCode(403)
+                .extract()
+                .path("message");
+
+        assertEquals(FAILED_AUTH_ERROR_MESSAGE, responseMessage);
+    }
 
 }
