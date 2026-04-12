@@ -1,4 +1,4 @@
-package ces.utils;
+package ces.utils.courses;
 
 import org.json.JSONObject;
 

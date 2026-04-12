@@ -1,29 +1,29 @@
 package ces.tests.instructor.courses.add;
 
+import ces.utils.courses.AddCourseRequest;
 import ces.utils.BaseSetUp;
+import ces.utils.courses.DeleteCourseRequest;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 
 class AddCourseTests {
 
-    private final Logger log = LoggerFactory.getLogger(AddCourseTests.class);
     BaseSetUp baseSetUp = new BaseSetUp();
+    AddCourseRequest addCourseRequest = new AddCourseRequest();
+    DeleteCourseRequest deleteCourseRequest = new DeleteCourseRequest();
     String actualCourseId;
 
     @AfterEach
     void tearDown() {
-        log.debug("Running clear down");
-        baseSetUp.deleteCourse(actualCourseId);
+        deleteCourseRequest.cleanUp(actualCourseId);
     }
 
     @Test
     void assertAddCourseStatus() {
-        Response response = baseSetUp.createCourse();
+        Response response = addCourseRequest.createCourse();
 
         response.then()
                 .assertThat()
@@ -34,7 +34,7 @@ class AddCourseTests {
 
         @Test
     void assertAddCourseSchema() {
-        Response response = baseSetUp.createCourse();
+        Response response = addCourseRequest.createCourse();
         response.then()
                 .assertThat()
                     .body(matchesJsonSchemaInClasspath("schemas/AddNewCourseSchema.json"));

@@ -1,8 +1,9 @@
 package ces.tests.instructor.courses.add;
 
-import ces.utils.AddCoursePayloadBuilder;
-import ces.utils.BaseSetUp;
-import ces.utils.Helper;
+import ces.utils.*;
+import ces.utils.courses.AddCoursePayloadBuilder;
+import ces.utils.courses.AddCourseRequest;
+import ces.utils.courses.DeleteCourseRequest;
 import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
@@ -20,6 +21,9 @@ class AddCourseValidationTests {
     private final Logger log = LoggerFactory.getLogger(AddCourseValidationTests.class);
 
     BaseSetUp baseSetUp = new BaseSetUp();
+    AddCourseRequest addCourseRequest = new AddCourseRequest();
+    DeleteCourseRequest deleteCourseRequest = new DeleteCourseRequest();
+    final String appUrl = HOST + COURSE_CONTEXT_PATH;
     String instructorId = "instructor_" + CANDIDATE_ID + CANDIDATE_ID;
     String newTitle = instructorId + "'s course";
 
@@ -35,7 +39,7 @@ class AddCourseValidationTests {
 
         log.debug("Creating course tests data with invalid dates");
 
-        Response response = baseSetUp.createCourse(incorrectDateRange);
+        Response response = addCourseRequest.createCourse(incorrectDateRange);
 
         String responseMessage = response.then()
                 .assertThat()
@@ -48,7 +52,7 @@ class AddCourseValidationTests {
 
     @Test
     void assertExistingCourseCode(){
-        Response courseSetup = baseSetUp.createCourse();
+        Response courseSetup = addCourseRequest.createCourse();
         String actualCourseId = baseSetUp.extractCourseId(courseSetup);
 
         JsonPath jsonPath = courseSetup.jsonPath();
@@ -64,7 +68,7 @@ class AddCourseValidationTests {
 
         log.debug("Creating course tests data with existing course code");
 
-        Response response = baseSetUp.createCourse(existingCourseCode);
+        Response response = addCourseRequest.createCourse(existingCourseCode);
 
         String responseMessage = response.then()
                 .assertThat()
@@ -75,7 +79,7 @@ class AddCourseValidationTests {
         assertEquals(COURSE_CODE_ERROR_MESSAGE, responseMessage);
 
         log.debug("Clearing up set up data");
-        baseSetUp.deleteCourse(actualCourseId);
+        deleteCourseRequest.cleanUp(actualCourseId);
     }
 
     @Test
@@ -85,7 +89,7 @@ class AddCourseValidationTests {
 
         log.debug("Creating course with missing required fields");
 
-        Response response = baseSetUp.createCourse(missingRequiredFields);
+        Response response = addCourseRequest.createCourse(missingRequiredFields);
 
         String responseMessage = response.then()
                 .assertThat()
@@ -99,8 +103,6 @@ class AddCourseValidationTests {
     @Test
     void assertNoAuthToken() {
         RequestSpecification request = RestAssured.given();
-
-        final String appUrl = Helper.HOST + "/courses";
 
         Response response = request
                 .accept("*/*")
@@ -120,8 +122,6 @@ class AddCourseValidationTests {
     @Test
     void assertFailedAuthToken() {
         RequestSpecification request = RestAssured.given();
-
-        final String appUrl = Helper.HOST + "/courses";
 
         Response response = request
                 .accept("*/*")
