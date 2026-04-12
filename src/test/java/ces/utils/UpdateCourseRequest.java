@@ -29,4 +29,21 @@ public class UpdateCourseRequest {
                 .when()
                 .put(appUrl);
     }
+
+    public Response updateCourseRequest(String actualCourseId, String payload) {
+        RequestSpecification request = RestAssured.given();
+        final String accessToken = bearerTokenGenerator.extractBearerToken("instructor");
+
+        String appUrl = Helper.HOST + "/courses/" + actualCourseId;
+
+        log.debug("Updating course for: {} with a string", actualCourseId);
+
+        return request
+                .body(payload)
+                .accept("*/*")
+                .contentType("application/json")
+                .header("Authorization", "Bearer " + accessToken)
+                .when()
+                .put(appUrl);
+    }
 }
