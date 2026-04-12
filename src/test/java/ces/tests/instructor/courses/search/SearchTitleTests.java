@@ -10,6 +10,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static ces.utils.Helper.CANDIDATE_ID;
+import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 
 class SearchTitleTests {
 
@@ -54,5 +55,24 @@ class SearchTitleTests {
         response.then()
                 .assertThat()
                 .statusCode(200);
+    }
+
+    @Test
+    void assertSearchTitleResultsSchema(){
+        String instructorId = "instructor_" + CANDIDATE_ID + CANDIDATE_ID;
+        Response response = searchCourseRequest.searchTitle("instructor", instructorId);
+
+        response.then()
+                .assertThat()
+                .body(matchesJsonSchemaInClasspath("schemas/SearchCourseTitleSchema.json"));
+    }
+
+    @Test
+    void assertSearchTitleNoResultsSchema(){
+        Response response = searchCourseRequest.searchTitle("instructor", "NoResults");
+
+        response.then()
+                .assertThat()
+                .body(matchesJsonSchemaInClasspath("schemas/SearchCourseTitleSchema.json"));
     }
 }
