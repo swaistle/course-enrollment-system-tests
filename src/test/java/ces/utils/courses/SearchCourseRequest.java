@@ -13,17 +13,16 @@ import static ces.utils.Helper.*;
 
 public class SearchCourseRequest {
 
-    final String role = "instructor";
     private final Logger log = LoggerFactory.getLogger(SearchCourseRequest.class);
 
 
     BearerTokenGenerator bearerTokenGenerator = new BearerTokenGenerator();
-    String accessToken = bearerTokenGenerator.extractBearerToken(role);
 
-    public Response searchTitle(String title){
+    public Response searchTitle(String role, String title){
         RequestSpecification request = RestAssured.given();
 
         String appUrl = HOST + COURSE_CONTEXT_PATH + COURSE_TITLE_CONTEXT_PATH + title;
+        String accessToken = bearerTokenGenerator.extractBearerToken(role);
 
         log.debug("Creating default course test data");
 

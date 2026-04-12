@@ -37,9 +37,19 @@ class SearchTitleTests {
     }
 
     @Test
-    void assertSearchTitleStatus(){
+    void assertInstructorSearchTitleStatus(){
         String instructorId = "instructor_" + CANDIDATE_ID + CANDIDATE_ID;
-        Response response = searchCourseRequest.searchTitle(instructorId);
+        Response response = searchCourseRequest.searchTitle("instructor", instructorId);
+
+        response.then()
+                .assertThat()
+                .statusCode(200);
+    }
+
+    @Test
+    void assertStudentSearchTitleStatus(){
+        String instructorId = "instructor_" + CANDIDATE_ID + CANDIDATE_ID;
+        Response response = searchCourseRequest.searchTitle("student", instructorId);
 
         response.then()
                 .assertThat()
