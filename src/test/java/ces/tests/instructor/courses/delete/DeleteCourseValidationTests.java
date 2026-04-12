@@ -36,4 +36,24 @@ class DeleteCourseValidationTests {
         assertEquals(DELETE_COURSE_ERROR_MESSAGE, responseMessage);
     }
 
+    @Test
+    void assertNoAuthToken(){
+        String appUrl = HOST + COURSE_CONTEXT_PATH + "/000000000000000000000000";
+
+        RequestSpecification request = RestAssured.given();
+
+        Response response = request
+                .accept("*/*")
+                .when()
+                .delete(appUrl);
+
+        String responseMessage = response.then()
+                .assertThat()
+                .statusCode(401)
+                .extract()
+                .path("message");
+
+        assertEquals(NO_AUTH_ERROR_MESSAGE, responseMessage);
+    }
+
 }
