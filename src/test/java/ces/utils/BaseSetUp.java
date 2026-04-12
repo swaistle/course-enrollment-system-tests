@@ -21,10 +21,28 @@ public class BaseSetUp {
 
     String courseId;
     String courseCode;
-    JSONObject payload = generatePayload();
+    JSONObject payload;
 
     BearerTokenGenerator bearerTokenGenerator = new BearerTokenGenerator();
 
+    public String generateCourseCode(){
+        ThreadLocalRandom random = ThreadLocalRandom.current();
+        int randomInt = random.nextInt(1,999);
+        String generatedCode;
+        generatedCode = "TST"+ CANDIDATE_ID + "_" + randomInt;
+        return generatedCode;
+    }
+
+    public String generateDate(int months){
+        LocalDate localDate = LocalDate.now();
+
+        if (months != 0) {
+            return localDate.plusMonths(months).toString();
+        }
+        else {
+            return localDate.toString();
+        }
+    }
 
     public Response createCourse(){
         RequestSpecification request = RestAssured.given();
@@ -32,6 +50,10 @@ public class BaseSetUp {
         final String appUrl = Helper.HOST + "/courses";
 
         final String accessToken = bearerTokenGenerator.extractBearerToken(role);
+
+        payload = generateDefaultPayload();
+
+        log.debug("Creating default course tests data");
 
         return request.body(payload.toString())
                 .accept("*/*")
@@ -48,9 +70,10 @@ public class BaseSetUp {
 
         final String accessToken = bearerTokenGenerator.extractBearerToken(role);
 
-        setCourseCode(newPayload);
+        payload = newPayload;
+        setCourseCode(payload);
 
-        return request.body(newPayload.toString())
+        return request.body(payload.toString())
                 .accept("*/*")
                 .contentType("application/json")
                 .header("Authorization", "Bearer " + accessToken)
@@ -73,7 +96,7 @@ public class BaseSetUp {
 
         final String accessToken = bearerTokenGenerator.extractBearerToken(role);
 
-        log.debug("Deleting course test data courseId: {}", courseId);
+        log.debug("Deleting course test data with courseId: {}", courseId);
 
         Response response = request.body(payload.toString())
                 .accept("*/*")
@@ -84,10 +107,10 @@ public class BaseSetUp {
         String actualCourseCode;
         actualCourseCode = response.then().extract().path("courseCode");
 
-        log.debug("Deleted course test data with courseCode: {}", actualCourseCode);
+        log.debug("Successfully deleted course test data with courseCode: {}", actualCourseCode);
     }
 
-    private JSONObject generatePayload(){
+    private JSONObject generateDefaultPayload(){
         String instructorId = "instructor_" + CANDIDATE_ID + CANDIDATE_ID;
         String newTitle = instructorId + "'s course";
 
@@ -104,28 +127,9 @@ public class BaseSetUp {
         return generatedPayload;
     }
 
-    void setCourseCode(JSONObject generatedPayload){
+    private void setCourseCode(JSONObject generatedPayload){
         courseCode = generatedPayload.get("courseCode").toString();
         log.debug("Setting up course test data with courseCode: {}", courseCode);
-    }
-
-    private String generateCourseCode(){
-        ThreadLocalRandom random = ThreadLocalRandom.current();
-        int randomInt = random.nextInt(1,999);
-        String generatedCode;
-        generatedCode = "TST"+ CANDIDATE_ID + "_" + randomInt;
-        return generatedCode;
-    }
-
-    private String generateDate(int months){
-        LocalDate localDate = LocalDate.now();
-
-        if (months != 0) {
-            return localDate.plusMonths(months).toString();
-        }
-        else {
-            return localDate.toString();
-        }
     }
 
 }

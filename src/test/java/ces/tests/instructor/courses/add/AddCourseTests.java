@@ -1,4 +1,4 @@
-package ces.tests.instructor.courses;
+package ces.tests.instructor.courses.add;
 
 import ces.utils.BaseSetUp;
 import io.restassured.response.Response;
@@ -20,6 +20,8 @@ class AddCourseTests {
     void tearDown() {
         log.debug("Running clear down");
         baseSetUp.deleteCourse(actualCourseId);
+
+
     }
 
     @Test
