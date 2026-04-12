@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 import static ces.utils.Helper.CANDIDATE_ID;
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 
-class SearchTitleTests {
+class SearchByTitleTests {
 
     BaseSetUp baseSetUp = new BaseSetUp();
     AddCourseRequest addCourseRequest = new AddCourseRequest();
@@ -38,9 +38,9 @@ class SearchTitleTests {
     }
 
     @Test
-    void assertSearchTitleStatus(){
+    void assertSearchByTitleStatus(){
         String instructorId = "instructor_" + CANDIDATE_ID + CANDIDATE_ID;
-        Response response = searchCourseRequest.searchTitle(instructorId);
+        Response response = searchCourseRequest.searchByTitle(instructorId);
 
         response.then()
                 .assertThat()
@@ -48,21 +48,21 @@ class SearchTitleTests {
     }
 
     @Test
-    void assertSearchTitleResultsSchema(){
+    void assertSearchByTitleResultsSchema(){
         String instructorId = "instructor_" + CANDIDATE_ID + CANDIDATE_ID;
-        Response response = searchCourseRequest.searchTitle(instructorId);
+        Response response = searchCourseRequest.searchByTitle(instructorId);
 
         response.then()
                 .assertThat()
-                .body(matchesJsonSchemaInClasspath("schemas/SearchCourseTitleSchema.json"));
+                .body(matchesJsonSchemaInClasspath("schemas/SearchCourseResultsSchema.json"));
     }
 
     @Test
-    void assertSearchTitleNoResultsSchema(){
-        Response response = searchCourseRequest.searchTitle("NoResults");
+    void assertSearchByTitleNoResultsSchema(){
+        Response response = searchCourseRequest.searchByTitle("NoResults");
 
         response.then()
                 .assertThat()
-                .body(matchesJsonSchemaInClasspath("schemas/SearchCourseTitleSchema.json"));
+                .body(matchesJsonSchemaInClasspath("schemas/SearchCourseResultsSchema.json"));
     }
 }
