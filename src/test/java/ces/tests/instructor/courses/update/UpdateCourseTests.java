@@ -6,15 +6,12 @@ import org.json.JSONObject;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.time.LocalDate;
 
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 
 class UpdateCourseTests {
-    private final Logger log = LoggerFactory.getLogger(UpdateCourseTests.class);
 
     BaseSetUp baseSetUp = new BaseSetUp();
     AddCourseRequest addCourseRequest = new AddCourseRequest();
@@ -36,7 +33,6 @@ class UpdateCourseTests {
 
     @AfterEach
     void tearDown() {
-        log.debug("Running clear down");
         deleteCourseRequest.cleanUp(actualCourseId);
     }
 

@@ -32,6 +32,8 @@ public class DeleteCourseRequest {
         }
 
     public void cleanUp(String courseId) {
+        log.debug("Running clear down");
+
         Response response = deleteCourse(courseId);
 
         String actualCourseCode;
