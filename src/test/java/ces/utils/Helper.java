@@ -16,5 +16,6 @@ public class Helper {
     public static final String FAILED_AUTH_ERROR_MESSAGE = "Failed to authenticate token";
     public static final String BAD_REQUEST_ERROR_MESSAGE = "Bad Request";
     public static final String NOT_FOUND_ERROR_MESSAGE = "Course not found";
+    public static final String DELETE_COURSE_ERROR_MESSAGE = "Error deleting course";
 
 }
