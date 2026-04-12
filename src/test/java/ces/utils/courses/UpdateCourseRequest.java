@@ -1,13 +1,16 @@
 package ces.utils.courses;
 
 import ces.utils.BearerTokenGenerator;
-import ces.utils.Helper;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import static ces.utils.Helper.COURSE_CONTEXT_PATH;
+import static ces.utils.Helper.HOST;
+
 
 public class UpdateCourseRequest {
 
@@ -19,7 +22,7 @@ public class UpdateCourseRequest {
         RequestSpecification request = RestAssured.given();
         final String accessToken = bearerTokenGenerator.extractBearerToken("instructor");
 
-        String appUrl = Helper.HOST + "/courses/" + actualCourseId;
+        String appUrl = HOST + COURSE_CONTEXT_PATH + "/" + actualCourseId;
 
         log.debug("Updating course for: {}", actualCourseId);
 
@@ -36,7 +39,7 @@ public class UpdateCourseRequest {
         RequestSpecification request = RestAssured.given();
         final String accessToken = bearerTokenGenerator.extractBearerToken("instructor");
 
-        String appUrl = Helper.HOST + "/courses/" + actualCourseId;
+        String appUrl = HOST + COURSE_CONTEXT_PATH + "/" + actualCourseId;
 
         log.debug("Updating course for: {} with a string", actualCourseId);
 

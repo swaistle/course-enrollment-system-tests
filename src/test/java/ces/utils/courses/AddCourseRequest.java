@@ -2,7 +2,7 @@ package ces.utils.courses;
 
 import ces.utils.BaseSetUp;
 import ces.utils.BearerTokenGenerator;
-import ces.utils.Helper;
+
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
@@ -10,20 +10,24 @@ import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import static ces.utils.Helper.COURSE_CONTEXT_PATH;
+import static ces.utils.Helper.HOST;
+
+
 public class AddCourseRequest {
 
     final String role = "instructor";
     private final Logger log = LoggerFactory.getLogger(AddCourseRequest.class);
 
     JSONObject payload;
+    final String appUrl = HOST + COURSE_CONTEXT_PATH;
+
 
     BaseSetUp baseSetUp = new BaseSetUp();
     BearerTokenGenerator bearerTokenGenerator = new BearerTokenGenerator();
 
     public Response createCourse(){
         RequestSpecification request = RestAssured.given();
-
-        final String appUrl = Helper.HOST + "/courses";
 
         final String accessToken = bearerTokenGenerator.extractBearerToken(role);
 
@@ -41,8 +45,6 @@ public class AddCourseRequest {
 
     public Response createCourse(JSONObject newPayload){
         RequestSpecification request = RestAssured.given();
-
-        final String appUrl = Helper.HOST + "/courses";
 
         final String accessToken = bearerTokenGenerator.extractBearerToken(role);
 

@@ -1,12 +1,14 @@
 package ces.utils.courses;
 
 import ces.utils.BearerTokenGenerator;
-import ces.utils.Helper;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import static ces.utils.Helper.COURSE_CONTEXT_PATH;
+import static ces.utils.Helper.HOST;
 
 public class DeleteCourseRequest {
 
@@ -19,7 +21,7 @@ public class DeleteCourseRequest {
     public Response deleteCourse(String actualCourseId){
         RequestSpecification request = RestAssured.given();
 
-        final String appUrl = Helper.HOST + "/courses/" + actualCourseId;
+        final String appUrl = HOST + COURSE_CONTEXT_PATH + "/" + actualCourseId;
 
         final String accessToken = bearerTokenGenerator.extractBearerToken(role);
 

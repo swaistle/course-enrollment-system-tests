@@ -23,6 +23,7 @@ class AddCourseValidationTests {
     BaseSetUp baseSetUp = new BaseSetUp();
     AddCourseRequest addCourseRequest = new AddCourseRequest();
     DeleteCourseRequest deleteCourseRequest = new DeleteCourseRequest();
+    final String appUrl = HOST + COURSE_CONTEXT_PATH;
     String instructorId = "instructor_" + CANDIDATE_ID + CANDIDATE_ID;
     String newTitle = instructorId + "'s course";
 
@@ -103,8 +104,6 @@ class AddCourseValidationTests {
     void assertNoAuthToken() {
         RequestSpecification request = RestAssured.given();
 
-        final String appUrl = Helper.HOST + "/courses";
-
         Response response = request
                 .accept("*/*")
                 .contentType("application/json")
@@ -123,8 +122,6 @@ class AddCourseValidationTests {
     @Test
     void assertFailedAuthToken() {
         RequestSpecification request = RestAssured.given();
-
-        final String appUrl = Helper.HOST + "/courses";
 
         Response response = request
                 .accept("*/*")
