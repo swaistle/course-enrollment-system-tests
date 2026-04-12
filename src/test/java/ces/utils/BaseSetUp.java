@@ -25,6 +25,7 @@ public class BaseSetUp {
 
     BearerTokenGenerator bearerTokenGenerator = new BearerTokenGenerator();
 
+
     public String generateCourseCode(){
         ThreadLocalRandom random = ThreadLocalRandom.current();
         int randomInt = random.nextInt(1,999);

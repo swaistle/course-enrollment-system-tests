@@ -15,13 +15,10 @@ class AddCourseTests {
     BaseSetUp baseSetUp = new BaseSetUp();
     String actualCourseId;
 
-
     @AfterEach
     void tearDown() {
         log.debug("Running clear down");
         baseSetUp.deleteCourse(actualCourseId);
-
-
     }
 
     @Test
