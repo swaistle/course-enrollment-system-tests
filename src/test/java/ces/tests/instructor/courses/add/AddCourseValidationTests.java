@@ -21,6 +21,7 @@ class AddCourseValidationTests {
     private final Logger log = LoggerFactory.getLogger(AddCourseValidationTests.class);
 
     BaseSetUp baseSetUp = new BaseSetUp();
+    BearerTokenGenerator bearerTokenGenerator = new BearerTokenGenerator();
     AddCourseRequest addCourseRequest = new AddCourseRequest();
     DeleteCourseRequest deleteCourseRequest = new DeleteCourseRequest();
     final String appUrl = HOST + COURSE_CONTEXT_PATH;
@@ -137,6 +138,29 @@ class AddCourseValidationTests {
                 .path("message");
 
         assertEquals(FAILED_AUTH_ERROR_MESSAGE, responseMessage);
+    }
+
+    @Test
+    void assertStudentCannotAddCourse() {
+        RequestSpecification request = RestAssured.given();
+
+        final String studentAccessToken = bearerTokenGenerator.extractBearerToken("student");
+
+
+        Response response = request
+                .accept("*/*")
+                .contentType("application/json")
+                .header("Authorization", "Bearer " + studentAccessToken)
+                .when()
+                .post(appUrl);
+
+        String responseMessage = response.then()
+                .assertThat()
+                .statusCode(403)
+                .extract()
+                .path("message");
+
+        assertEquals(ACCESS_DENIED_INSTRUCTORS_ONLY, responseMessage);
     }
 
 }
