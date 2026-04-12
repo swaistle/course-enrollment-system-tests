@@ -1,0 +1,21 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Course Availability Schema",
+  "type": "object",
+  "properties": {
+    "courseCode": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "availableSlots": {
+      "type": "number"
+    }
+  },
+  "required": [
+    "courseCode",
+    "title",
+    "availableSlots"
+  ]
+}

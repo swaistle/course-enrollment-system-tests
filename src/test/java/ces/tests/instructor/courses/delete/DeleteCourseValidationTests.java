@@ -118,7 +118,7 @@ class DeleteCourseValidationTests {
                 .extract()
                 .path("message");
 
-        assertEquals(DELETE_ACCESS_DENIED_ERROR_MESSAGE, responseMessage);
+        assertEquals(ACCESS_DENIED_INSTRUCTORS_ONLY, responseMessage);
     }
 
 }

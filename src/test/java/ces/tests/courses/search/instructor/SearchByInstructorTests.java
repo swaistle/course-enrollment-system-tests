@@ -1,4 +1,4 @@
-package ces.tests.instructor.courses.search.instructor;
+package ces.tests.courses.search.instructor;
 
 import ces.utils.BaseSetUp;
 import ces.utils.courses.AddCourseRequest;

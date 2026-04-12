@@ -1,18 +1,18 @@
-package ces.tests.instructor.courses.search.title;
+package ces.tests.courses.search.availabilty;
 
 import ces.utils.BaseSetUp;
 import ces.utils.courses.AddCourseRequest;
 import ces.utils.courses.DeleteCourseRequest;
 import ces.utils.courses.SearchCourseRequest;
+import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static ces.utils.Helper.CANDIDATE_ID;
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 
-class SearchByTitleTests {
+class SearchByAvailabilityTests {
 
     BaseSetUp baseSetUp = new BaseSetUp();
     AddCourseRequest addCourseRequest = new AddCourseRequest();
@@ -20,6 +20,7 @@ class SearchByTitleTests {
     SearchCourseRequest searchCourseRequest = new SearchCourseRequest();
 
     String actualCourseId;
+    String getExistingCourseCode;
 
     @BeforeEach
     void setUp(){
@@ -30,6 +31,9 @@ class SearchByTitleTests {
                 .statusCode(201);
 
         actualCourseId = baseSetUp.extractCourseId(response);
+
+        JsonPath jsonPath = response.jsonPath();
+        getExistingCourseCode= jsonPath.getString("newCourse.courseCode");
     }
 
     @AfterEach
@@ -38,9 +42,8 @@ class SearchByTitleTests {
     }
 
     @Test
-    void assertSearchByTitleStatus(){
-        String instructorId = "instructor_" + CANDIDATE_ID + CANDIDATE_ID;
-        Response response = searchCourseRequest.searchByTitle(instructorId);
+    void assertSearchByAvailabilityStatus(){
+        Response response = searchCourseRequest.searchByAvailability(getExistingCourseCode);
 
         response.then()
                 .assertThat()
@@ -48,21 +51,12 @@ class SearchByTitleTests {
     }
 
     @Test
-    void assertSearchByTitleResultsSchema(){
-        String instructorId = "instructor_" + CANDIDATE_ID + CANDIDATE_ID;
-        Response response = searchCourseRequest.searchByTitle(instructorId);
+    void assertSearchByAvailabilitySchema(){
+        Response response = searchCourseRequest.searchByAvailability(getExistingCourseCode);
 
         response.then()
                 .assertThat()
-                .body(matchesJsonSchemaInClasspath("schemas/SearchCourseResultsSchema.json"));
+                .body(matchesJsonSchemaInClasspath("schemas/SearchCourseAvailabilitySchema.json"));
     }
 
-    @Test
-    void assertSearchByTitleNoResultsSchema(){
-        Response response = searchCourseRequest.searchByTitle("NoResults");
-
-        response.then()
-                .assertThat()
-                .body(matchesJsonSchemaInClasspath("schemas/SearchCourseResultsSchema.json"));
-    }
 }
