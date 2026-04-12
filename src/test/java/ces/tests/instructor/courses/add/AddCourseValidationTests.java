@@ -2,14 +2,14 @@ package ces.tests.instructor.courses.add;
 
 import ces.utils.AddCoursePayloadBuilder;
 import ces.utils.BaseSetUp;
+import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import static ces.utils.Helper.CANDIDATE_ID;
-import static ces.utils.Helper.DATE_ERROR_MESSAGE;
+import static ces.utils.Helper.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class AddCourseValidationTests {
@@ -17,12 +17,11 @@ class AddCourseValidationTests {
     private final Logger log = LoggerFactory.getLogger(AddCourseValidationTests.class);
 
     BaseSetUp baseSetUp = new BaseSetUp();
+    String instructorId = "instructor_" + CANDIDATE_ID + CANDIDATE_ID;
+    String newTitle = instructorId + "'s course";
 
     @Test
     void assertStartDateValidation() {
-        String instructorId = "instructor_" + CANDIDATE_ID + CANDIDATE_ID;
-        String newTitle = instructorId + "'s course";
-
         JSONObject incorrectDateRange = new AddCoursePayloadBuilder()
                 .withTitle(newTitle)
                 .withInstructor(instructorId)
@@ -42,6 +41,38 @@ class AddCourseValidationTests {
                 .path("error");
 
         assertEquals(DATE_ERROR_MESSAGE, responseMessage);
+    }
+
+    @Test
+    void assertExistingCourseCode(){
+        Response courseSetup = baseSetUp.createCourse();
+        String actualCourseId = baseSetUp.extractCourseId(courseSetup);
+
+        JsonPath jsonPath = courseSetup.jsonPath();
+        String getExistingCourseCode= jsonPath.getString("newCourse.courseCode");
+
+        JSONObject existingCourseCode = new AddCoursePayloadBuilder()
+                .withTitle(newTitle)
+                .withInstructor(instructorId)
+                .withCourseCode(getExistingCourseCode)
+                .withStartDate(baseSetUp.generateDate(0))
+                .withEndDate(baseSetUp.generateDate(3))
+                .build();
+
+        log.debug("Creating course tests data with existing course code");
+
+        Response response = baseSetUp.createCourse(existingCourseCode);
+
+        String responseMessage = response.then()
+                .assertThat()
+                .statusCode(400)
+                .extract()
+                .path("error");
+
+        assertEquals(COURSE_CODE_ERROR_MESSAGE, responseMessage);
+
+        log.debug("Clearing up set up data");
+        baseSetUp.deleteCourse(actualCourseId);
     }
 
 }

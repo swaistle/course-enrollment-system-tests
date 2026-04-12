@@ -8,5 +8,6 @@ public class Helper {
     public static final String PASSWORD = System.getenv("PASSWORD");
 
     public static final String DATE_ERROR_MESSAGE = "startDate must be before endDate";
+    public static final String COURSE_CODE_ERROR_MESSAGE = "Course code already exists";
 
 }
