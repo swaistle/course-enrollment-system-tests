@@ -41,7 +41,7 @@ class EnrolCourseTests {
     }
 
     @Test
-    void asserEnrolStatus() {
+    void assertEnrolStatus() {
         String studentId = "student_" + CANDIDATE_ID + CANDIDATE_ID;
         Response response = enrolCourseRequest.enrolCourse(studentId, actualCourseCode);
 
@@ -52,14 +52,13 @@ class EnrolCourseTests {
     }
 
     @Test
-    void asserEnrolSchema() {
+    void assertEnrolSchema() {
         String studentId = "student_" + CANDIDATE_ID + CANDIDATE_ID;
         Response response = enrolCourseRequest.enrolCourse(studentId, actualCourseCode);
 
         response.then()
                 .assertThat()
                 .body(matchesJsonSchemaInClasspath("schemas/EnrolCourseSchema.json"));
-
     }
 
 }
