@@ -53,9 +53,9 @@ class AddCourseValidationTests {
     @Test
     void assertExistingCourseCode(){
         Response courseSetup = addCourseRequest.createCourse();
-        String actualCourseId = baseSetUp.extractActualCourseId(courseSetup);
+        String actualCourseId = baseSetUp.extractCourseId(courseSetup);
 
-        String actualCourseCode = baseSetUp.extractActualCourseCode(courseSetup);
+        String actualCourseCode = baseSetUp.extractCourseCode(courseSetup);
 
         JSONObject existingCourseCode = new AddCoursePayloadBuilder()
                 .withTitle(newTitle)

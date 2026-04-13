@@ -27,8 +27,8 @@ class DeleteCourseTests {
                 .assertThat()
                 .statusCode(201);
 
-        actualCourseId = baseSetUp.extractActualCourseId(response);
-        expectedCourseCode = baseSetUp.extractActualCourseCode(response);
+        actualCourseId = baseSetUp.extractCourseId(response);
+        expectedCourseCode = baseSetUp.extractCourseCode(response);
     }
 
     @Test
