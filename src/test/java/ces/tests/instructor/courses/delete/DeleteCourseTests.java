@@ -3,7 +3,6 @@ package ces.tests.instructor.courses.delete;
 import ces.utils.BaseSetUp;
 import ces.utils.courses.AddCourseRequest;
 import ces.utils.courses.DeleteCourseRequest;
-import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,7 +17,7 @@ class DeleteCourseTests {
     DeleteCourseRequest deleteCourseRequest = new DeleteCourseRequest();
 
     String actualCourseId;
-    String getExistingCourseCode;
+    String expectedCourseCode;
 
     @BeforeEach
     void setUp(){
@@ -28,10 +27,8 @@ class DeleteCourseTests {
                 .assertThat()
                 .statusCode(201);
 
-        actualCourseId = baseSetUp.extractCourseId(response);
-
-        JsonPath jsonPath = response.jsonPath();
-        getExistingCourseCode= jsonPath.getString("newCourse.courseCode");
+        actualCourseId = baseSetUp.extractActualCourseId(response);
+        expectedCourseCode = baseSetUp.extractActualCourseCode(response);
     }
 
     @Test
@@ -61,7 +58,7 @@ class DeleteCourseTests {
                 .extract()
                 .path("courseCode");
 
-        assertEquals(getExistingCourseCode, responseMessage);
+        assertEquals(expectedCourseCode, responseMessage);
     }
 
 }

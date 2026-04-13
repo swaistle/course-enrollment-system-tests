@@ -1,9 +1,9 @@
-package ces.tests.courses.search.instructor;
+package ces.tests.student.enrolments.enrol;
 
 import ces.utils.BaseSetUp;
 import ces.utils.courses.AddCourseRequest;
 import ces.utils.courses.DeleteCourseRequest;
-import ces.utils.courses.SearchCourseRequest;
+import ces.utils.enrolments.EnrolCourseRequest;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -12,17 +12,18 @@ import org.junit.jupiter.api.Test;
 import static ces.utils.Helper.CANDIDATE_ID;
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 
-class SearchByInstructorTests {
+class EnrolCourseTests {
 
     BaseSetUp baseSetUp = new BaseSetUp();
     AddCourseRequest addCourseRequest = new AddCourseRequest();
     DeleteCourseRequest deleteCourseRequest = new DeleteCourseRequest();
-    SearchCourseRequest searchCourseRequest = new SearchCourseRequest();
+    EnrolCourseRequest enrolCourseRequest = new EnrolCourseRequest();
 
     String actualCourseId;
+    String actualCourseCode;
 
     @BeforeEach
-    void setUp(){
+    void setUp() {
         Response response = addCourseRequest.createCourse();
 
         response.then()
@@ -30,6 +31,7 @@ class SearchByInstructorTests {
                 .statusCode(201);
 
         actualCourseId = baseSetUp.extractActualCourseId(response);
+        actualCourseCode = baseSetUp.extractActualCourseCode(response);
     }
 
     @AfterEach
@@ -38,31 +40,24 @@ class SearchByInstructorTests {
     }
 
     @Test
-    void assertSearchByInstructorStatus(){
-        String instructorId = "instructor_" + CANDIDATE_ID + CANDIDATE_ID;
-        Response response = searchCourseRequest.searchByInstructor(instructorId);
+    void assertEnrolStatus() {
+        String studentId = "student_" + CANDIDATE_ID + CANDIDATE_ID;
+        Response response = enrolCourseRequest.enrolCourse(studentId, actualCourseCode);
 
         response.then()
                 .assertThat()
-                .statusCode(200);
+                .statusCode(201);
+
     }
 
     @Test
-    void assertSearchByInstructorResultsSchema(){
-        String instructorId = "instructor_" + CANDIDATE_ID + CANDIDATE_ID;
-        Response response = searchCourseRequest.searchByInstructor(instructorId);
+    void assertEnrolSchema() {
+        String studentId = "student_" + CANDIDATE_ID + CANDIDATE_ID;
+        Response response = enrolCourseRequest.enrolCourse(studentId, actualCourseCode);
 
         response.then()
                 .assertThat()
-                .body(matchesJsonSchemaInClasspath("schemas/SearchCourseResultsSchema.json"));
+                .body(matchesJsonSchemaInClasspath("schemas/EnrolCourseSchema.json"));
     }
 
-    @Test
-    void assertSearchByInstructorNoResultsSchema(){
-        Response response = searchCourseRequest.searchByInstructor("NoResults");
-
-        response.then()
-                .assertThat()
-                .body(matchesJsonSchemaInClasspath("schemas/SearchCourseResultsSchema.json"));
-    }
 }

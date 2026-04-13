@@ -1,0 +1,43 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Generated schema for Root",
+  "type": "object",
+  "properties": {
+    "message": {
+      "type": "string"
+    },
+    "enrolmentJson": {
+      "type": "object",
+      "properties": {
+        "username": {
+          "type": "string"
+        },
+        "courseCode": {
+          "type": "string"
+        },
+        "courseTitle": {
+          "type": "string"
+        },
+        "enrolDate": {
+          "type": "string"
+        },
+        "completionDate": {},
+        "status": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "username",
+        "courseCode",
+        "courseTitle",
+        "enrolDate",
+        "completionDate",
+        "status"
+      ]
+    }
+  },
+  "required": [
+    "message",
+    "enrolmentJson"
+  ]
+}

@@ -13,6 +13,12 @@ public class Helper {
     public static final String COURSE_INSTRUCTOR_CONTEXT_PATH = "/instructor/";
     public static final String COURSE_AVAILABILITY_CONTEXT_PATH = "/availability/";
 
+    public static final String ENROLMENTS_CONTEXT_PATH = "/enrolments";
+    public static final String ENROLMENTS_ENROL_CONTEXT_PATH = "/enrol";
+    public static final String ENROLMENTS_DROP_CONTEXT_PATH = "/drop";
+    public static final String ENROLMENTS_HISTORY_CONTEXT_PATH = "/history";
+    public static final String ENROLMENTS_ACTIVE_CONTEXT_PATH = "/active";
+
     public static final String DATE_ERROR_MESSAGE = "startDate must be before endDate";
     public static final String COURSE_CODE_ERROR_MESSAGE = "Course code already exists";
     public static final String COURSE_REQUIRED_FIELDS_ERROR_MESSAGE = "All fields are required: title, instructor, courseCode, category, totalCapacity, startDate, endDate";
@@ -23,6 +29,11 @@ public class Helper {
     public static final String DELETE_COURSE_ERROR_MESSAGE = "Error deleting course";
     public static final String DELETE_FORBIDDEN_ERROR_MESSAGE = "Forbidden: you can only delete your own courses";
     public static final String ACCESS_DENIED_INSTRUCTORS_ONLY = "Access denied: instructors only";
+    public static final String ACCESS_DENIED_STUDENTS_ONLY = "Access denied: students only";
     public static final String FETCH_COURSE_ERROR_MESSAGE = "Error fetching course";
+    public static final String COURSE_FULL_MESSAGE = "Course full";
+    public static final String COURSE_FULL_ERROR_MESSAGE = "Course is full";
+    public static final String COURSE_ALREADY_ENROLLED_ERROR_MESSAGE = "Already enrolled in this course";
+    public static final String USER_NOT_FOUND_ERROR_MESSAGE = "User does not exist";
 
 }
