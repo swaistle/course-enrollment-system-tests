@@ -10,6 +10,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static ces.utils.Helper.CANDIDATE_ID;
+import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 
 class EnrolCourseTests {
 
@@ -47,6 +48,17 @@ class EnrolCourseTests {
         response.then()
                 .assertThat()
                 .statusCode(201);
+
+    }
+
+    @Test
+    void asserEnrolSchema() {
+        String studentId = "student_" + CANDIDATE_ID + CANDIDATE_ID;
+        Response response = enrolCourseRequest.enrolCourse(studentId, actualCourseCode);
+
+        response.then()
+                .assertThat()
+                .body(matchesJsonSchemaInClasspath("schemas/EnrolCourseSchema.json"));
 
     }
 
