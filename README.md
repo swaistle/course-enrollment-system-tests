@@ -18,6 +18,9 @@ Setting environment variables enables these parameters to be set securely within
 
 Maven command:
 ```aiignore
-APP_URL=<host with no paths> CANDIDATE_ID=<candidate/applicant id> PASSWORD=<password> mvn test
+APP_URL=<host with no paths> CANDIDATE_ID=<candidate/applicant id> PASSWORD=<password> mvn surefire-report:report test
 ```
 When running JUnit Test within an IDE make sure to set the environment variables within the configuration of the test.
+
+## Reports
+This framework uses Maven SureFire Report plugin. When you run the test with arg `surefire-report:report` it will generate a basic report in the `target/report` folder.
