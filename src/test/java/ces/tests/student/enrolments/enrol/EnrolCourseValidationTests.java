@@ -1,6 +1,7 @@
 package ces.tests.student.enrolments.enrol;
 
 import ces.utils.BaseSetUp;
+import ces.utils.BearerTokenGenerator;
 import ces.utils.courses.AddCourseRequest;
 import ces.utils.courses.DeleteCourseRequest;
 import ces.utils.courses.SearchCourseRequest;
@@ -19,6 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class EnrolCourseValidationTests {
 
     BaseSetUp baseSetUp = new BaseSetUp();
+    BearerTokenGenerator bearerTokenGenerator = new BearerTokenGenerator();
     AddCourseRequest addCourseRequest = new AddCourseRequest();
     DeleteCourseRequest deleteCourseRequest = new DeleteCourseRequest();
     SearchCourseRequest searchCourseRequest = new SearchCourseRequest();
@@ -92,6 +94,27 @@ class EnrolCourseValidationTests {
         assertEquals(FAILED_AUTH_ERROR_MESSAGE, responseMessage);
     }
 
+    @Test
+    void assertInstructorCannotEnrolCourse() {
+        RequestSpecification request = RestAssured.given();
+
+        final String studentAccessToken = bearerTokenGenerator.extractBearerToken("instructor");
+
+        Response response = request
+                .accept("*/*")
+                .contentType("application/json")
+                .header("Authorization", "Bearer " + studentAccessToken)
+                .when()
+                .post(appUrl);
+
+        String responseMessage = response.then()
+                .assertThat()
+                .statusCode(403)
+                .extract()
+                .path("message");
+
+        assertEquals(ACCESS_DENIED_STUDENTS_ONLY, responseMessage);
+    }
 
     @Nested
     class NestedEnrolValidationTests {
