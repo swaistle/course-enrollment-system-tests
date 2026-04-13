@@ -161,6 +161,4 @@ class AddCourseValidationTests {
         assertEquals(ACCESS_DENIED_INSTRUCTORS_ONLY, responseMessage);
     }
 
-    //TODO Add 500 Internal Error Test
-
 }

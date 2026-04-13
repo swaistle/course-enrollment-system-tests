@@ -28,6 +28,4 @@ class SearchAllCoursesTests {
                 .body(matchesJsonSchemaInClasspath("schemas/SearchCourseResultsSchema.json"));
     }
 
-    //TODO Add 500 Internal Error Test
-
 }

@@ -41,4 +41,24 @@ public class EnrolCourseRequest {
                 .post(appUrl);
     }
 
+    public Response dropCourse(String studentId, String courseCode){
+        RequestSpecification request = RestAssured.given();
+        final String accessToken = bearerTokenGenerator.extractBearerToken(role);
+
+        String appUrl = appPath + ENROLMENTS_DROP_CONTEXT_PATH;
+
+        payload = new JSONObject();
+        payload.put("username", studentId);
+        payload.put("courseCode", courseCode);
+
+        log.debug("Dropping student {} from course {}", studentId, courseCode);
+
+        return request.body(payload.toString())
+                .contentType("application/json")
+                .accept("*/*")
+                .header("Authorization", "Bearer " + accessToken)
+                .when()
+                .post(appUrl);
+    }
+
 }

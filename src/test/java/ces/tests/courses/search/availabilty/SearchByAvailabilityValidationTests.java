@@ -40,6 +40,4 @@ class SearchByAvailabilityValidationTests {
         assertEquals(COURSE_FULL_MESSAGE, actualAvailableSlots);
     }
 
-    //TODO Add 500 Internal Error Test
-
 }

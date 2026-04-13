@@ -35,5 +35,6 @@ public class Helper {
     public static final String COURSE_FULL_ERROR_MESSAGE = "Course is full";
     public static final String COURSE_ALREADY_ENROLLED_ERROR_MESSAGE = "Already enrolled in this course";
     public static final String USER_NOT_FOUND_ERROR_MESSAGE = "User does not exist";
+    public static final String NO_ACTIVE_ENROLLMENT_ERROR_MESSAGE = "No active enrolment found for this course";
 
 }
