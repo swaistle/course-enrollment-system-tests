@@ -29,7 +29,7 @@ class SearchByInstructorTests {
                 .assertThat()
                 .statusCode(201);
 
-        actualCourseId = baseSetUp.extractCourseId(response);
+        actualCourseId = baseSetUp.extractActualCourseId(response);
     }
 
     @AfterEach

@@ -5,7 +5,6 @@ import ces.utils.courses.AddCoursePayloadBuilder;
 import ces.utils.courses.AddCourseRequest;
 import ces.utils.courses.DeleteCourseRequest;
 import io.restassured.RestAssured;
-import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import org.json.JSONObject;
@@ -54,15 +53,14 @@ class AddCourseValidationTests {
     @Test
     void assertExistingCourseCode(){
         Response courseSetup = addCourseRequest.createCourse();
-        String actualCourseId = baseSetUp.extractCourseId(courseSetup);
+        String actualCourseId = baseSetUp.extractActualCourseId(courseSetup);
 
-        JsonPath jsonPath = courseSetup.jsonPath();
-        String getExistingCourseCode= jsonPath.getString("newCourse.courseCode");
+        String actualCourseCode = baseSetUp.extractActualCourseCode(courseSetup);
 
         JSONObject existingCourseCode = new AddCoursePayloadBuilder()
                 .withTitle(newTitle)
                 .withInstructor(instructorId)
-                .withCourseCode(getExistingCourseCode)
+                .withCourseCode(actualCourseCode)
                 .withStartDate(baseSetUp.generateDate(0))
                 .withEndDate(baseSetUp.generateDate(3))
                 .build();

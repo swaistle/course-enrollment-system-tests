@@ -38,12 +38,20 @@ public class BaseSetUp {
         }
     }
 
-    public String extractCourseId(Response response) {
+    public String extractActualCourseId(Response response) {
         JsonPath jsonPath = response.jsonPath();
         courseId = jsonPath.getString("newCourse._id");
         log.debug("actualCourse id: {}", courseId);
 
         return courseId;
+    }
+
+    public String extractActualCourseCode(Response response) {
+        JsonPath jsonPath = response.jsonPath();
+        courseCode = jsonPath.getString("newCourse.courseCode");
+        log.debug("actual codeCourse: {}", courseCode);
+
+        return courseCode;
     }
 
     public JSONObject generateDefaultPayload(){

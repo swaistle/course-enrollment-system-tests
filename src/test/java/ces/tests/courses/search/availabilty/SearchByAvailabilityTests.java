@@ -4,7 +4,6 @@ import ces.utils.BaseSetUp;
 import ces.utils.courses.AddCourseRequest;
 import ces.utils.courses.DeleteCourseRequest;
 import ces.utils.courses.SearchCourseRequest;
-import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -20,7 +19,7 @@ class SearchByAvailabilityTests {
     SearchCourseRequest searchCourseRequest = new SearchCourseRequest();
 
     String actualCourseId;
-    String getExistingCourseCode;
+    String actualCourseCode;
 
     @BeforeEach
     void setUp(){
@@ -30,10 +29,8 @@ class SearchByAvailabilityTests {
                 .assertThat()
                 .statusCode(201);
 
-        actualCourseId = baseSetUp.extractCourseId(response);
-
-        JsonPath jsonPath = response.jsonPath();
-        getExistingCourseCode= jsonPath.getString("newCourse.courseCode");
+        actualCourseId = baseSetUp.extractActualCourseId(response);
+        actualCourseCode = baseSetUp.extractActualCourseCode(response);
     }
 
     @AfterEach
@@ -43,7 +40,7 @@ class SearchByAvailabilityTests {
 
     @Test
     void assertSearchByAvailabilityStatus(){
-        Response response = searchCourseRequest.searchByAvailability(getExistingCourseCode);
+        Response response = searchCourseRequest.searchByAvailability(actualCourseCode);
 
         response.then()
                 .assertThat()
@@ -52,7 +49,7 @@ class SearchByAvailabilityTests {
 
     @Test
     void assertSearchByAvailabilitySchema(){
-        Response response = searchCourseRequest.searchByAvailability(getExistingCourseCode);
+        Response response = searchCourseRequest.searchByAvailability(actualCourseCode);
 
         response.then()
                 .assertThat()
