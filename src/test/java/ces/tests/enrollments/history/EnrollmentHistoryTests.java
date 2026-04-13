@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import static ces.utils.Helper.CANDIDATE_ID;
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 
-class ViewEnrollmentHistoryTests {
+class EnrollmentHistoryTests {
 
     EnrolCourseRequest enrolCourseRequest = new EnrolCourseRequest();
     String studentId = "student_" + CANDIDATE_ID + CANDIDATE_ID;
@@ -37,7 +37,7 @@ class ViewEnrollmentHistoryTests {
 
         response.then()
                 .assertThat()
-                .body(matchesJsonSchemaInClasspath("schemas/SearchCourseResultsSchema.json"));
+                .body(matchesJsonSchemaInClasspath("schemas/EnrollmentHistorySchema.json"));
     }
 
 }
