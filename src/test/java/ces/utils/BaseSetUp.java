@@ -18,6 +18,7 @@ public class BaseSetUp {
 
     String courseId;
     String courseCode;
+    int availableSlots;
 
     public String generateCourseCode(){
         ThreadLocalRandom random = ThreadLocalRandom.current();
@@ -38,20 +39,28 @@ public class BaseSetUp {
         }
     }
 
-    public String extractActualCourseId(Response response) {
+    public String extractCourseId(Response response) {
         JsonPath jsonPath = response.jsonPath();
         courseId = jsonPath.getString("newCourse._id");
-        log.debug("actualCourse id: {}", courseId);
+        log.debug("Extracted courseId: {}", courseId);
 
         return courseId;
     }
 
-    public String extractActualCourseCode(Response response) {
+    public String extractCourseCode(Response response) {
         JsonPath jsonPath = response.jsonPath();
         courseCode = jsonPath.getString("newCourse.courseCode");
-        log.debug("actual codeCourse: {}", courseCode);
+        log.debug("Extracted courseCode: {}", courseCode);
 
         return courseCode;
+    }
+
+    public int extractAvailableSlots(Response response, String path) {
+        JsonPath jsonPath = response.jsonPath();
+        availableSlots = jsonPath.getInt(path);
+        log.debug("Extracted availableSlots: {}", availableSlots);
+
+        return availableSlots;
     }
 
     public JSONObject generateDefaultPayload(){
