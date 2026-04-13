@@ -10,6 +10,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static ces.utils.Helper.CANDIDATE_ID;
+import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 
 class DropCourseTests {
 
@@ -49,7 +50,7 @@ class DropCourseTests {
     }
 
     @Test
-    void assertDropCourse() {
+    void assertDropCourseStatus() {
         Response response = enrolCourseRequest.dropCourse(studentId, testDataCourseCode);
 
         response.then()
@@ -58,5 +59,14 @@ class DropCourseTests {
 
     }
 
+    @Test
+    void assertDropCourseSchema() {
+        Response response = enrolCourseRequest.dropCourse(studentId, testDataCourseCode);
+
+        response.then()
+                .assertThat()
+                .body(matchesJsonSchemaInClasspath("schemas/EnrolCourseSchema.json"));
+
+    }
 
 }
