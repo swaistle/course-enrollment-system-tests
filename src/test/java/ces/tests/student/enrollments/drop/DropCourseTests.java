@@ -33,8 +33,8 @@ class DropCourseTests {
                 .assertThat()
                 .statusCode(201);
 
-        testDataCourseId = baseSetUp.extractActualCourseId(response);
-        testDataCourseCode = baseSetUp.extractActualCourseCode(response);
+        testDataCourseId = baseSetUp.extractCourseId(response);
+        testDataCourseCode = baseSetUp.extractCourseCode(response);
 
         Response initialEnrollResponse = enrolCourseRequest.enrolCourse(studentId, testDataCourseCode);
 

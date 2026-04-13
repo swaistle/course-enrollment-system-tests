@@ -29,7 +29,7 @@ class AddCourseTests {
                 .assertThat()
                 .statusCode(201);
 
-        actualCourseId = baseSetUp.extractActualCourseId(response);
+        actualCourseId = baseSetUp.extractCourseId(response);
     }
 
         @Test
@@ -39,7 +39,7 @@ class AddCourseTests {
                 .assertThat()
                     .body(matchesJsonSchemaInClasspath("schemas/AddNewCourseSchema.json"));
 
-        actualCourseId = baseSetUp.extractActualCourseId(response);
+        actualCourseId = baseSetUp.extractCourseId(response);
     }
 
 }

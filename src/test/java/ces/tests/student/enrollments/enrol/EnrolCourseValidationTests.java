@@ -141,8 +141,8 @@ class EnrolCourseValidationTests {
                     .assertThat()
                     .statusCode(201);
 
-            actualCourseId = baseSetUp.extractActualCourseId(response);
-            actualCourseCode = baseSetUp.extractActualCourseCode(response);
+            actualCourseId = baseSetUp.extractCourseId(response);
+            actualCourseCode = baseSetUp.extractCourseCode(response);
         }
 
         @AfterEach
