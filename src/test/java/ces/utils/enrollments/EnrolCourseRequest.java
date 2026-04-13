@@ -1,4 +1,4 @@
-package ces.utils.enrolments;
+package ces.utils.enrollments;
 
 import ces.utils.BearerTokenGenerator;
 
@@ -17,7 +17,7 @@ public class EnrolCourseRequest {
 
     final String role = "student";
     JSONObject payload;
-    final String appPath = HOST + ENROLMENTS_CONTEXT_PATH;
+    final String appPath = HOST + ENROLLMENTS_CONTEXT_PATH;
 
     BearerTokenGenerator bearerTokenGenerator = new BearerTokenGenerator();
 
@@ -25,7 +25,7 @@ public class EnrolCourseRequest {
         RequestSpecification request = RestAssured.given();
         final String accessToken = bearerTokenGenerator.extractBearerToken(role);
 
-        String appUrl = appPath + ENROLMENTS_ENROL_CONTEXT_PATH;
+        String appUrl = appPath + ENROLLMENTS_ENROL_CONTEXT_PATH;
 
         payload = new JSONObject();
         payload.put("username", studentId);
@@ -45,13 +45,32 @@ public class EnrolCourseRequest {
         RequestSpecification request = RestAssured.given();
         final String accessToken = bearerTokenGenerator.extractBearerToken(role);
 
-        String appUrl = appPath + ENROLMENTS_DROP_CONTEXT_PATH;
+        String appUrl = appPath + ENROLLMENTS_DROP_CONTEXT_PATH;
 
         payload = new JSONObject();
         payload.put("username", studentId);
         payload.put("courseCode", courseCode);
 
         log.debug("Dropping student {} from course {}", studentId, courseCode);
+
+        return request.body(payload.toString())
+                .contentType("application/json")
+                .accept("*/*")
+                .header("Authorization", "Bearer " + accessToken)
+                .when()
+                .post(appUrl);
+    }
+
+    public Response viewHistory(String role, String studentId){
+        RequestSpecification request = RestAssured.given();
+        final String accessToken = bearerTokenGenerator.extractBearerToken(role);
+
+        String appUrl = appPath + ENROLLMENTS_HISTORY_CONTEXT_PATH;
+
+        payload = new JSONObject();
+        payload.put("username", studentId);
+
+        log.debug("Viewing Course History for student {}", studentId);
 
         return request.body(payload.toString())
                 .contentType("application/json")

@@ -1,9 +1,9 @@
-package ces.tests.student.enrolments.enrol;
+package ces.tests.student.enrollments.drop;
 
 import ces.utils.BaseSetUp;
 import ces.utils.courses.AddCourseRequest;
 import ces.utils.courses.DeleteCourseRequest;
-import ces.utils.enrolments.EnrolCourseRequest;
+import ces.utils.enrollments.EnrolCourseRequest;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -12,52 +12,61 @@ import org.junit.jupiter.api.Test;
 import static ces.utils.Helper.CANDIDATE_ID;
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 
-class EnrolCourseTests {
+class DropCourseTests {
 
     BaseSetUp baseSetUp = new BaseSetUp();
     AddCourseRequest addCourseRequest = new AddCourseRequest();
     DeleteCourseRequest deleteCourseRequest = new DeleteCourseRequest();
     EnrolCourseRequest enrolCourseRequest = new EnrolCourseRequest();
 
-    String actualCourseId;
-    String actualCourseCode;
+    String testDataCourseId;
+    String testDataCourseCode;
+
+    String studentId = "student_" + CANDIDATE_ID + CANDIDATE_ID;
 
     @BeforeEach
     void setUp() {
+
         Response response = addCourseRequest.createCourse();
 
         response.then()
                 .assertThat()
                 .statusCode(201);
 
-        actualCourseId = baseSetUp.extractActualCourseId(response);
-        actualCourseCode = baseSetUp.extractActualCourseCode(response);
-    }
+        testDataCourseId = baseSetUp.extractActualCourseId(response);
+        testDataCourseCode = baseSetUp.extractActualCourseCode(response);
 
-    @AfterEach
-    void tearDown() {
-        deleteCourseRequest.cleanUp(actualCourseId);
-    }
+        Response initialEnrollResponse = enrolCourseRequest.enrolCourse(studentId, testDataCourseCode);
 
-    @Test
-    void assertEnrolStatus() {
-        String studentId = "student_" + CANDIDATE_ID + CANDIDATE_ID;
-        Response response = enrolCourseRequest.enrolCourse(studentId, actualCourseCode);
-
-        response.then()
+        initialEnrollResponse.then()
                 .assertThat()
                 .statusCode(201);
 
     }
 
+    @AfterEach
+    void tearDown() {
+        deleteCourseRequest.cleanUp(testDataCourseId);
+    }
+
     @Test
-    void assertEnrolSchema() {
-        String studentId = "student_" + CANDIDATE_ID + CANDIDATE_ID;
-        Response response = enrolCourseRequest.enrolCourse(studentId, actualCourseCode);
+    void assertDropCourseStatus() {
+        Response response = enrolCourseRequest.dropCourse(studentId, testDataCourseCode);
+
+        response.then()
+                .assertThat()
+                .statusCode(200);
+
+    }
+
+    @Test
+    void assertDropCourseSchema() {
+        Response response = enrolCourseRequest.dropCourse(studentId, testDataCourseCode);
 
         response.then()
                 .assertThat()
                 .body(matchesJsonSchemaInClasspath("schemas/EnrolCourseSchema.json"));
+
     }
 
 }

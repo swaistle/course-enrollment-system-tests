@@ -1,10 +1,10 @@
-package ces.tests.student.enrolments.drop;
+package ces.tests.student.enrollments.drop;
 
 import ces.utils.BaseSetUp;
 import ces.utils.BearerTokenGenerator;
 import ces.utils.courses.AddCourseRequest;
 import ces.utils.courses.DeleteCourseRequest;
-import ces.utils.enrolments.EnrolCourseRequest;
+import ces.utils.enrollments.EnrolCourseRequest;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 
@@ -26,7 +26,7 @@ class DropCourseValidationTests {
     DeleteCourseRequest deleteCourseRequest = new DeleteCourseRequest();
     EnrolCourseRequest enrolCourseRequest = new EnrolCourseRequest();
 
-    final String appUrl = HOST + ENROLMENTS_CONTEXT_PATH + ENROLMENTS_DROP_CONTEXT_PATH;
+    final String appUrl = HOST + ENROLLMENTS_CONTEXT_PATH + ENROLLMENTS_DROP_CONTEXT_PATH;
 
     String actualCourseId;
     String actualCourseCode;
