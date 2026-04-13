@@ -5,7 +5,9 @@ import ces.utils.courses.AddCourseRequest;
 import ces.utils.courses.DeleteCourseRequest;
 import ces.utils.courses.SearchCourseRequest;
 import ces.utils.enrolments.EnrolCourseRequest;
+import io.restassured.RestAssured;
 import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
@@ -21,6 +23,8 @@ class EnrolCourseValidationTests {
     DeleteCourseRequest deleteCourseRequest = new DeleteCourseRequest();
     SearchCourseRequest searchCourseRequest = new SearchCourseRequest();
     EnrolCourseRequest enrolCourseRequest = new EnrolCourseRequest();
+
+    final String appUrl = HOST + ENROLMENTS_CONTEXT_PATH + ENROLMENTS_ENROL_CONTEXT_PATH;
 
     String actualCourseId;
     String actualCourseCode;
@@ -47,6 +51,25 @@ class EnrolCourseValidationTests {
 
         assertEquals(COURSE_FULL_ERROR_MESSAGE, responseMessage);
 
+    }
+
+    @Test
+    void assertNoAuthToken() {
+        RequestSpecification request = RestAssured.given();
+
+        Response response = request
+                .accept("*/*")
+                .contentType("application/json")
+                .when()
+                .post(appUrl);
+
+        String responseMessage = response.then()
+                .assertThat()
+                .statusCode(401)
+                .extract()
+                .path("message");
+
+        assertEquals(NO_AUTH_ERROR_MESSAGE, responseMessage);
     }
 
     @Nested
@@ -90,7 +113,5 @@ class EnrolCourseValidationTests {
         }
 
     }
-
-
 
 }
