@@ -33,5 +33,6 @@ public class Helper {
     public static final String FETCH_COURSE_ERROR_MESSAGE = "Error fetching course";
     public static final String COURSE_FULL_MESSAGE = "Course full";
     public static final String COURSE_FULL_ERROR_MESSAGE = "Course is full";
+    public static final String COURSE_ALREADY_ENROLLED_ERROR_MESSAGE = "Already enrolled in this course";
 
 }

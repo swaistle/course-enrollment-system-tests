@@ -22,7 +22,6 @@ class EnrolCourseTests {
     String actualCourseId;
     String actualCourseCode;
 
-
     @BeforeEach
     void setUp() {
         Response response = addCourseRequest.createCourse();
