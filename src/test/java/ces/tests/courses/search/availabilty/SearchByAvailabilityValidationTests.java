@@ -5,7 +5,7 @@ import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.Test;
 
-import static ces.utils.Helper.COURSE_FULL_ERROR_MESSAGE;
+import static ces.utils.Helper.COURSE_FULL_MESSAGE;
 import static ces.utils.Helper.NOT_FOUND_ERROR_MESSAGE;
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -37,7 +37,7 @@ class SearchByAvailabilityValidationTests {
 
         JsonPath jsonPath = response.jsonPath();
         String actualAvailableSlots = jsonPath.getString("availableSlots");
-        assertEquals(COURSE_FULL_ERROR_MESSAGE, actualAvailableSlots);
+        assertEquals(COURSE_FULL_MESSAGE, actualAvailableSlots);
     }
 
     //TODO Add 500 Internal Error Test
