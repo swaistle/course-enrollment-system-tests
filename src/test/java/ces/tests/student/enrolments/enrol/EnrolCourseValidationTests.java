@@ -116,6 +116,7 @@ class EnrolCourseValidationTests {
         assertEquals(ACCESS_DENIED_STUDENTS_ONLY, responseMessage);
     }
 
+
     @Nested
     class NestedEnrolValidationTests {
         @BeforeEach
@@ -154,6 +155,20 @@ class EnrolCourseValidationTests {
                     .path("error");
 
             assertEquals(COURSE_ALREADY_ENROLLED_ERROR_MESSAGE, responseMessage);
+        }
+
+        @Test
+        void assertUserDoesNotExist() {
+            String studentId = "student_notreal";
+            Response response = enrolCourseRequest.enrolCourse(studentId, actualCourseCode);
+
+            String responseMessage = response.then()
+                    .assertThat()
+                    .statusCode(404)
+                    .extract()
+                    .path("error");
+
+            assertEquals(USER_NOT_FOUND_ERROR_MESSAGE, responseMessage);
         }
 
     }
