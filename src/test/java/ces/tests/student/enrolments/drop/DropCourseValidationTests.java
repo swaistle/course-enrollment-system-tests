@@ -16,7 +16,6 @@ import org.junit.jupiter.api.Test;
 
 import static ces.utils.Helper.*;
 import static ces.utils.Helper.ACCESS_DENIED_STUDENTS_ONLY;
-import static ces.utils.Helper.NOT_FOUND_ERROR_MESSAGE;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class DropCourseValidationTests {
@@ -94,9 +93,9 @@ class DropCourseValidationTests {
     }
 
     @Test
-    void assertCourseDoesNotExist() {
+    void assertNoActiveEnrollment() {
         String studentId = "student_" + CANDIDATE_ID + CANDIDATE_ID;
-        Response response = enrolCourseRequest.enrolCourse(studentId, "notReal");
+        Response response = enrolCourseRequest.dropCourse(studentId, "JAVA101");
 
         String responseMessage = response.then()
                 .assertThat()
@@ -104,7 +103,7 @@ class DropCourseValidationTests {
                 .extract()
                 .path("error");
 
-        assertEquals(NOT_FOUND_ERROR_MESSAGE, responseMessage);
+        assertEquals(NO_ACTIVE_ENROLLMENT_ERROR_MESSAGE, responseMessage);
 
     }
 
@@ -130,7 +129,7 @@ class DropCourseValidationTests {
         @Test
         void assertUserDoesNotExist() {
             String studentId = "student_notreal";
-            Response response = enrolCourseRequest.enrolCourse(studentId, actualCourseCode);
+            Response response = enrolCourseRequest.dropCourse(studentId, actualCourseCode);
 
             String responseMessage = response.then()
                     .assertThat()
