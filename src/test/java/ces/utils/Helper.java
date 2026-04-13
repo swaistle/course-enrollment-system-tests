@@ -31,5 +31,7 @@ public class Helper {
     public static final String ACCESS_DENIED_INSTRUCTORS_ONLY = "Access denied: instructors only";
     public static final String ACCESS_DENIED_STUDENTS_ONLY = "Access denied: students only";
     public static final String FETCH_COURSE_ERROR_MESSAGE = "Error fetching course";
+    public static final String COURSE_FULL_MESSAGE = "Course full";
+    public static final String COURSE_FULL_ERROR_MESSAGE = "Course is full";
 
 }
