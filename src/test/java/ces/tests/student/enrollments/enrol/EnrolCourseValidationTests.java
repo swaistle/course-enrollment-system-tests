@@ -1,11 +1,11 @@
-package ces.tests.student.enrolments.enrol;
+package ces.tests.student.enrollments.enrol;
 
 import ces.utils.BaseSetUp;
 import ces.utils.BearerTokenGenerator;
 import ces.utils.courses.AddCourseRequest;
 import ces.utils.courses.DeleteCourseRequest;
 import ces.utils.courses.SearchCourseRequest;
-import ces.utils.enrolments.EnrolCourseRequest;
+import ces.utils.enrollments.EnrolCourseRequest;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
@@ -26,7 +26,7 @@ class EnrolCourseValidationTests {
     SearchCourseRequest searchCourseRequest = new SearchCourseRequest();
     EnrolCourseRequest enrolCourseRequest = new EnrolCourseRequest();
 
-    final String appUrl = HOST + ENROLMENTS_CONTEXT_PATH + ENROLMENTS_ENROL_CONTEXT_PATH;
+    final String appUrl = HOST + ENROLLMENTS_CONTEXT_PATH + ENROLLMENTS_ENROL_CONTEXT_PATH;
 
     String actualCourseId;
     String actualCourseCode;

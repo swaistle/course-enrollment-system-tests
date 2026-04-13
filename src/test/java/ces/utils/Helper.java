@@ -13,11 +13,11 @@ public class Helper {
     public static final String COURSE_INSTRUCTOR_CONTEXT_PATH = "/instructor/";
     public static final String COURSE_AVAILABILITY_CONTEXT_PATH = "/availability/";
 
-    public static final String ENROLMENTS_CONTEXT_PATH = "/enrolments";
-    public static final String ENROLMENTS_ENROL_CONTEXT_PATH = "/enrol";
-    public static final String ENROLMENTS_DROP_CONTEXT_PATH = "/drop";
-    public static final String ENROLMENTS_HISTORY_CONTEXT_PATH = "/history";
-    public static final String ENROLMENTS_ACTIVE_CONTEXT_PATH = "/active";
+    public static final String ENROLLMENTS_CONTEXT_PATH = "/enrolments";
+    public static final String ENROLLMENTS_ENROL_CONTEXT_PATH = "/enrol";
+    public static final String ENROLLMENTS_DROP_CONTEXT_PATH = "/drop";
+    public static final String ENROLLMENTS_HISTORY_CONTEXT_PATH = "/history";
+    public static final String ENROLLMENTS_ACTIVE_CONTEXT_PATH = "/active";
 
     public static final String DATE_ERROR_MESSAGE = "startDate must be before endDate";
     public static final String COURSE_CODE_ERROR_MESSAGE = "Course code already exists";
