@@ -1,41 +1,18 @@
 package ces.tests.courses.search.availabilty;
 
-import ces.utils.BaseSetUp;
-import ces.utils.courses.AddCourseRequest;
-import ces.utils.courses.DeleteCourseRequest;
 import ces.utils.courses.SearchCourseRequest;
+import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import static ces.utils.Helper.COURSE_FULL_ERROR_MESSAGE;
 import static ces.utils.Helper.NOT_FOUND_ERROR_MESSAGE;
+import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class SearchByAvailabilityValidationTests {
 
-    BaseSetUp baseSetUp = new BaseSetUp();
-    AddCourseRequest addCourseRequest = new AddCourseRequest();
-    DeleteCourseRequest deleteCourseRequest = new DeleteCourseRequest();
-    SearchCourseRequest searchCourseRequest = new SearchCourseRequest();
-
-    String actualCourseId;
-
-    @BeforeEach
-    void setUp(){
-        Response response = addCourseRequest.createCourse();
-
-        response.then()
-                .assertThat()
-                .statusCode(201);
-
-        actualCourseId = baseSetUp.extractActualCourseId(response);
-    }
-
-    @AfterEach
-    void tearDown() {
-        deleteCourseRequest.cleanUp(actualCourseId);
-    }
+  SearchCourseRequest searchCourseRequest = new SearchCourseRequest();
 
     @Test
     void assertNotFound(){
@@ -48,6 +25,19 @@ class SearchByAvailabilityValidationTests {
                 .path("error");
 
         assertEquals(NOT_FOUND_ERROR_MESSAGE, responseMessage);
+    }
+
+    @Test
+    void assertCourseFullSchema() {
+        Response response = searchCourseRequest.searchByAvailability("TESTB4B5D0");
+
+        response.then()
+                .assertThat()
+                .body(matchesJsonSchemaInClasspath("schemas/SearchCourseAvailabilitySchema.json"));
+
+        JsonPath jsonPath = response.jsonPath();
+        String actualAvailableSlots = jsonPath.getString("availableSlots");
+        assertEquals(COURSE_FULL_ERROR_MESSAGE, actualAvailableSlots);
     }
 
     //TODO Add 500 Internal Error Test
