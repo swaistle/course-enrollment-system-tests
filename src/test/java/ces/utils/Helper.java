@@ -19,6 +19,7 @@ public class Helper {
     public static final String ENROLLMENTS_HISTORY_CONTEXT_PATH = "/history";
     public static final String ENROLLMENTS_ACTIVE_CONTEXT_PATH = "/active";
 
+    public static final String INVALID_CREDENTIALS_ERROR_MESSAGE = "Invalid credentials";
     public static final String DATE_ERROR_MESSAGE = "startDate must be before endDate";
     public static final String COURSE_CODE_ERROR_MESSAGE = "Course code already exists";
     public static final String COURSE_REQUIRED_FIELDS_ERROR_MESSAGE = "All fields are required: title, instructor, courseCode, category, totalCapacity, startDate, endDate";

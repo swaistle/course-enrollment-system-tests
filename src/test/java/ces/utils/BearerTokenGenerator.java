@@ -9,6 +9,8 @@ import org.slf4j.LoggerFactory;
 import java.util.HashMap;
 import java.util.Map;
 
+import static ces.utils.Helper.*;
+
 public class BearerTokenGenerator {
 
     static final Logger log = LoggerFactory.getLogger(BearerTokenGenerator.class);
@@ -16,15 +18,14 @@ public class BearerTokenGenerator {
 
     public Response generateBearerToken(String role) {
         //Environment variables
-        final String appUrl = Helper.HOST + "/" + role + "/login";
-        final String candidateId = Helper.CANDIDATE_ID;
-        final String password = Helper.PASSWORD;
+        final String appUrl = HOST + "/" + role + "/login";
+        final String candidateId = CANDIDATE_ID;
 
         final String username = role + "_" + candidateId + candidateId;
 
         Map<String, String> requestBody = new HashMap<>();
         requestBody.put("username", username);
-        requestBody.put("password", password);
+        requestBody.put("password", PASSWORD);
 
         log.debug("Generating Bearer Token for: {}", role);
 
