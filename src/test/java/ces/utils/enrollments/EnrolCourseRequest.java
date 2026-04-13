@@ -80,4 +80,23 @@ public class EnrolCourseRequest {
                 .post(appUrl);
     }
 
+    public Response viewActiveCourses(String role, String studentId){
+        RequestSpecification request = RestAssured.given();
+        final String accessToken = bearerTokenGenerator.extractBearerToken(role);
+
+        String appUrl = appPath + ENROLLMENTS_ACTIVE_CONTEXT_PATH;
+
+        payload = new JSONObject();
+        payload.put("username", studentId);
+
+        log.debug("Viewing Active Courses for student {}", studentId);
+
+        return request.body(payload.toString())
+                .contentType("application/json")
+                .accept("*/*")
+                .header("Authorization", "Bearer " + accessToken)
+                .when()
+                .post(appUrl);
+    }
+
 }
