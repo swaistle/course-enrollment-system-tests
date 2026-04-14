@@ -17,7 +17,7 @@ public class DeleteCourseRequest {
 
     BearerTokenGenerator bearerTokenGenerator = new BearerTokenGenerator();
 
-    public Response deleteCourse(String actualCourseId){
+    public Response deleteCourse(String actualCourseId) {
         RequestSpecification request = RestAssured.given();
 
         final String appUrl = HOST + COURSE_CONTEXT_PATH + "/" + actualCourseId;

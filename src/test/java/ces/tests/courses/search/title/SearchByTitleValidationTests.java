@@ -7,13 +7,12 @@ import io.restassured.specification.RequestSpecification;
 import org.junit.jupiter.api.Test;
 
 import static ces.utils.Helper.*;
-import static ces.utils.Helper.COURSE_TITLE_CONTEXT_PATH;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class SearchByTitleValidationTests {
 
     @Test
-    void assertBadRequest(){
+    void assertBadRequest() {
         RequestSpecification request = RestAssured.given();
         String appUrl = HOST + COURSE_CONTEXT_PATH + COURSE_TITLE_CONTEXT_PATH + "?foo";
 

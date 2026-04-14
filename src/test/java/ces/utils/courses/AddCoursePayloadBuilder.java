@@ -22,7 +22,25 @@ public class AddCoursePayloadBuilder {
                 "2026-08-01");
     }
 
-    public AddCoursePayloadBuilder withTitle(String newValue){
+    private AddCoursePayloadBuilder(
+            String title,
+            String instructor,
+            String courseCode,
+            String category,
+            int totalCapacity,
+            String startDate,
+            String endDate
+    ) {
+        this.title = title;
+        this.instructor = instructor;
+        this.courseCode = courseCode;
+        this.category = category;
+        this.totalCapacity = totalCapacity;
+        this.startDate = startDate;
+        this.endDate = endDate;
+    }
+
+    public AddCoursePayloadBuilder withTitle(String newValue) {
         return new AddCoursePayloadBuilder(newValue,
                 instructor,
                 courseCode,
@@ -32,7 +50,7 @@ public class AddCoursePayloadBuilder {
                 endDate);
     }
 
-    public AddCoursePayloadBuilder withInstructor(String newValue){
+    public AddCoursePayloadBuilder withInstructor(String newValue) {
         return new AddCoursePayloadBuilder(title,
                 newValue,
                 courseCode,
@@ -42,7 +60,7 @@ public class AddCoursePayloadBuilder {
                 endDate);
     }
 
-    public AddCoursePayloadBuilder withCourseCode(String newValue){
+    public AddCoursePayloadBuilder withCourseCode(String newValue) {
         return new AddCoursePayloadBuilder(title,
                 instructor,
                 newValue,
@@ -52,7 +70,7 @@ public class AddCoursePayloadBuilder {
                 endDate);
     }
 
-    public AddCoursePayloadBuilder withCategory(String newValue){
+    public AddCoursePayloadBuilder withCategory(String newValue) {
         return new AddCoursePayloadBuilder(title,
                 instructor,
                 courseCode,
@@ -62,7 +80,7 @@ public class AddCoursePayloadBuilder {
                 endDate);
     }
 
-    public AddCoursePayloadBuilder withTotalCapacity(int newValue){
+    public AddCoursePayloadBuilder withTotalCapacity(int newValue) {
         return new AddCoursePayloadBuilder(title,
                 instructor,
                 courseCode,
@@ -72,7 +90,7 @@ public class AddCoursePayloadBuilder {
                 endDate);
     }
 
-    public AddCoursePayloadBuilder withStartDate(String newValue){
+    public AddCoursePayloadBuilder withStartDate(String newValue) {
         return new AddCoursePayloadBuilder(title,
                 instructor,
                 courseCode,
@@ -82,7 +100,7 @@ public class AddCoursePayloadBuilder {
                 endDate);
     }
 
-    public AddCoursePayloadBuilder withEndDate(String newValue){
+    public AddCoursePayloadBuilder withEndDate(String newValue) {
         return new AddCoursePayloadBuilder(title,
                 instructor,
                 courseCode,
@@ -102,24 +120,6 @@ public class AddCoursePayloadBuilder {
         json.put("startDate", startDate);
         json.put("endDate", endDate);
         return json;
-    }
-
-    private AddCoursePayloadBuilder(
-            String title,
-            String instructor,
-            String courseCode,
-            String category,
-            int totalCapacity,
-            String startDate,
-            String endDate
-    ){
-        this.title = title;
-        this.instructor = instructor;
-        this.courseCode = courseCode;
-        this.category = category;
-        this.totalCapacity = totalCapacity;
-        this.startDate = startDate;
-        this.endDate = endDate;
     }
 
 }

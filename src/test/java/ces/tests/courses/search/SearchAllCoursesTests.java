@@ -11,7 +11,7 @@ class SearchAllCoursesTests {
     SearchCourseRequest searchCourseRequest = new SearchCourseRequest();
 
     @Test
-    void assertSearchAllStatus(){
+    void assertSearchAllStatus() {
         Response response = searchCourseRequest.searchAll();
 
         response.then()
@@ -20,7 +20,7 @@ class SearchAllCoursesTests {
     }
 
     @Test
-    void assertSearchAllSchema(){
+    void assertSearchAllSchema() {
         Response response = searchCourseRequest.searchAll();
 
         response.then()

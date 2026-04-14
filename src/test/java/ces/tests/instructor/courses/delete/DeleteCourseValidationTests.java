@@ -16,7 +16,7 @@ class DeleteCourseValidationTests {
     final String accessToken = bearerTokenGenerator.extractBearerToken("instructor");
 
     @Test
-    void assertErrorDeletingCourse(){
+    void assertErrorDeletingCourse() {
         String appUrl = HOST + COURSE_CONTEXT_PATH + "/test";
 
         RequestSpecification request = RestAssured.given();
@@ -37,7 +37,7 @@ class DeleteCourseValidationTests {
     }
 
     @Test
-    void assertNoAuthToken(){
+    void assertNoAuthToken() {
         String appUrl = HOST + COURSE_CONTEXT_PATH + "/000000000000000000000000";
 
         RequestSpecification request = RestAssured.given();
@@ -57,7 +57,7 @@ class DeleteCourseValidationTests {
     }
 
     @Test
-    void assertNotFound(){
+    void assertNotFound() {
         String appUrl = HOST + COURSE_CONTEXT_PATH + "/000000000000000000000000";
 
         RequestSpecification request = RestAssured.given();
@@ -78,7 +78,7 @@ class DeleteCourseValidationTests {
     }
 
     @Test
-    void assertCannotDeleteDifferentInstructorCourse(){
+    void assertCannotDeleteDifferentInstructorCourse() {
         String appUrl = HOST + COURSE_CONTEXT_PATH + "/69db938b17414acde244b9fc";
 
         RequestSpecification request = RestAssured.given();
@@ -99,7 +99,7 @@ class DeleteCourseValidationTests {
     }
 
     @Test
-    void assertStudentCannotDeleteCourse(){
+    void assertStudentCannotDeleteCourse() {
         String appUrl = HOST + COURSE_CONTEXT_PATH + "/69db938b17414acde244b9fc";
 
         String studentAccessToken = bearerTokenGenerator.extractBearerToken("student");

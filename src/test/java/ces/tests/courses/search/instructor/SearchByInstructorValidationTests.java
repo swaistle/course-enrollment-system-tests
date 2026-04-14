@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class SearchByInstructorValidationTests {
 
     @Test
-    void assertBadRequest(){
+    void assertBadRequest() {
         RequestSpecification request = RestAssured.given();
         String appUrl = HOST + COURSE_CONTEXT_PATH + COURSE_INSTRUCTOR_CONTEXT_PATH + "?foo";
 

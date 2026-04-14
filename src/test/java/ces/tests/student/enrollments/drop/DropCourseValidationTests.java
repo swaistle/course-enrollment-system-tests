@@ -7,7 +7,6 @@ import ces.utils.courses.DeleteCourseRequest;
 import ces.utils.enrollments.EnrolCourseRequest;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
-
 import io.restassured.specification.RequestSpecification;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -15,19 +14,16 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import static ces.utils.Helper.*;
-import static ces.utils.Helper.ACCESS_DENIED_STUDENTS_ONLY;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class DropCourseValidationTests {
 
+    final String appUrl = HOST + ENROLLMENTS_CONTEXT_PATH + ENROLLMENTS_DROP_CONTEXT_PATH;
     BaseSetUp baseSetUp = new BaseSetUp();
     BearerTokenGenerator bearerTokenGenerator = new BearerTokenGenerator();
     AddCourseRequest addCourseRequest = new AddCourseRequest();
     DeleteCourseRequest deleteCourseRequest = new DeleteCourseRequest();
     EnrolCourseRequest enrolCourseRequest = new EnrolCourseRequest();
-
-    final String appUrl = HOST + ENROLLMENTS_CONTEXT_PATH + ENROLLMENTS_DROP_CONTEXT_PATH;
-
     String actualCourseId;
     String actualCourseCode;
 

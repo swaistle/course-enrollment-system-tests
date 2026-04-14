@@ -1,7 +1,7 @@
 package ces.tests.instructor.courses.add;
 
-import ces.utils.courses.AddCourseRequest;
 import ces.utils.BaseSetUp;
+import ces.utils.courses.AddCourseRequest;
 import ces.utils.courses.DeleteCourseRequest;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.AfterEach;
@@ -32,12 +32,12 @@ class AddCourseTests {
         actualCourseId = baseSetUp.extractCourseId(response);
     }
 
-        @Test
+    @Test
     void assertAddCourseSchema() {
         Response response = addCourseRequest.createCourse();
         response.then()
                 .assertThat()
-                    .body(matchesJsonSchemaInClasspath("schemas/AddNewCourseSchema.json"));
+                .body(matchesJsonSchemaInClasspath("schemas/AddNewCourseSchema.json"));
 
         actualCourseId = baseSetUp.extractCourseId(response);
     }

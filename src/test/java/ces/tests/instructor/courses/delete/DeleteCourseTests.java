@@ -20,7 +20,7 @@ class DeleteCourseTests {
     String expectedCourseCode;
 
     @BeforeEach
-    void setUp(){
+    void setUp() {
         Response response = addCourseRequest.createCourse();
 
         response.then()
@@ -32,7 +32,7 @@ class DeleteCourseTests {
     }
 
     @Test
-    void assertDeleteStatus(){
+    void assertDeleteStatus() {
         Response response = deleteCourseRequest.deleteCourse(actualCourseId);
 
         response.then()
@@ -41,7 +41,7 @@ class DeleteCourseTests {
     }
 
     @Test
-    void assertDeleteSchema(){
+    void assertDeleteSchema() {
         Response response = deleteCourseRequest.deleteCourse(actualCourseId);
 
         response.then()
@@ -50,7 +50,7 @@ class DeleteCourseTests {
     }
 
     @Test
-    void assertCourseCodeResponse(){
+    void assertCourseCodeResponse() {
         Response response = deleteCourseRequest.deleteCourse(actualCourseId);
 
         String responseMessage = response.then()

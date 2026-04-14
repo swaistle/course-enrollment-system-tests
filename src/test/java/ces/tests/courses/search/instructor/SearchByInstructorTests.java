@@ -22,7 +22,7 @@ class SearchByInstructorTests {
     String actualCourseId;
 
     @BeforeEach
-    void setUp(){
+    void setUp() {
         Response response = addCourseRequest.createCourse();
 
         response.then()
@@ -38,7 +38,7 @@ class SearchByInstructorTests {
     }
 
     @Test
-    void assertSearchByInstructorStatus(){
+    void assertSearchByInstructorStatus() {
         String instructorId = "instructor_" + CANDIDATE_ID + CANDIDATE_ID;
         Response response = searchCourseRequest.searchByInstructor(instructorId);
 
@@ -48,7 +48,7 @@ class SearchByInstructorTests {
     }
 
     @Test
-    void assertSearchByInstructorResultsSchema(){
+    void assertSearchByInstructorResultsSchema() {
         String instructorId = "instructor_" + CANDIDATE_ID + CANDIDATE_ID;
         Response response = searchCourseRequest.searchByInstructor(instructorId);
 
@@ -58,7 +58,7 @@ class SearchByInstructorTests {
     }
 
     @Test
-    void assertSearchByInstructorNoResultsSchema(){
+    void assertSearchByInstructorNoResultsSchema() {
         Response response = searchCourseRequest.searchByInstructor("NoResults");
 
         response.then()

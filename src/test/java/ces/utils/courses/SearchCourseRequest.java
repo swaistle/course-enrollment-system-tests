@@ -12,7 +12,7 @@ public class SearchCourseRequest {
 
     private final Logger log = LoggerFactory.getLogger(SearchCourseRequest.class);
 
-    public Response searchAll(){
+    public Response searchAll() {
         RequestSpecification request = RestAssured.given();
 
         String appUrl = HOST + COURSE_CONTEXT_PATH + COURSE_ALL_CONTEXT_PATH;
@@ -25,7 +25,7 @@ public class SearchCourseRequest {
                 .get(appUrl);
     }
 
-    public Response searchByTitle(String title){
+    public Response searchByTitle(String title) {
         RequestSpecification request = RestAssured.given();
 
         String appUrl = HOST + COURSE_CONTEXT_PATH + COURSE_TITLE_CONTEXT_PATH + title;
@@ -38,7 +38,7 @@ public class SearchCourseRequest {
                 .get(appUrl);
     }
 
-    public Response searchByInstructor(String instructor){
+    public Response searchByInstructor(String instructor) {
         RequestSpecification request = RestAssured.given();
 
         String appUrl = HOST + COURSE_CONTEXT_PATH + COURSE_INSTRUCTOR_CONTEXT_PATH + instructor;
@@ -51,7 +51,7 @@ public class SearchCourseRequest {
                 .get(appUrl);
     }
 
-    public Response searchByAvailability(String courseCode){
+    public Response searchByAvailability(String courseCode) {
         RequestSpecification request = RestAssured.given();
 
         String appUrl = HOST + COURSE_CONTEXT_PATH + COURSE_AVAILABILITY_CONTEXT_PATH + courseCode;

@@ -19,15 +19,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class EnrolCourseValidationTests {
 
+    final String appUrl = HOST + ENROLLMENTS_CONTEXT_PATH + ENROLLMENTS_ENROL_CONTEXT_PATH;
     BaseSetUp baseSetUp = new BaseSetUp();
     BearerTokenGenerator bearerTokenGenerator = new BearerTokenGenerator();
     AddCourseRequest addCourseRequest = new AddCourseRequest();
     DeleteCourseRequest deleteCourseRequest = new DeleteCourseRequest();
     SearchCourseRequest searchCourseRequest = new SearchCourseRequest();
     EnrolCourseRequest enrolCourseRequest = new EnrolCourseRequest();
-
-    final String appUrl = HOST + ENROLLMENTS_CONTEXT_PATH + ENROLLMENTS_ENROL_CONTEXT_PATH;
-
     String actualCourseId;
     String actualCourseCode;
 
