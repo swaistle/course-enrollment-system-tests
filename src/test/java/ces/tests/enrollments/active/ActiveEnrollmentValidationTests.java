@@ -11,8 +11,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ActiveEnrollmentValidationTests {
 
-    EnrolCourseRequest enrolCourseRequest = new EnrolCourseRequest();
     final String appUrl = HOST + ENROLLMENTS_CONTEXT_PATH + ENROLLMENTS_ACTIVE_CONTEXT_PATH;
+    EnrolCourseRequest enrolCourseRequest = new EnrolCourseRequest();
 
     @Test
     void assertNoAuthToken() {

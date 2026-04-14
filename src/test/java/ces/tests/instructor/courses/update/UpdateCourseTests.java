@@ -1,6 +1,6 @@
 package ces.tests.instructor.courses.update;
 
-import ces.utils.*;
+import ces.utils.BaseSetUp;
 import ces.utils.courses.AddCourseRequest;
 import ces.utils.courses.DeleteCourseRequest;
 import ces.utils.courses.UpdateCourseRequest;
@@ -24,7 +24,7 @@ class UpdateCourseTests {
     String actualCourseId;
 
     @BeforeEach
-    void setUp(){
+    void setUp() {
         Response response = addCourseRequest.createCourse();
 
         response.then()
@@ -40,7 +40,7 @@ class UpdateCourseTests {
     }
 
     @Test
-    void assertUpdateCourseStatus(){
+    void assertUpdateCourseStatus() {
         LocalDate newDate = LocalDate.now().plusMonths(5);
 
         JSONObject updatePayload = new JSONObject();
@@ -57,7 +57,7 @@ class UpdateCourseTests {
     }
 
     @Test
-    void assertUpdateCourseSchema(){
+    void assertUpdateCourseSchema() {
         LocalDate newDate = LocalDate.now().plusMonths(5);
 
         JSONObject updatePayload = new JSONObject();

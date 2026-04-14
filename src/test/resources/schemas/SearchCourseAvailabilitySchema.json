@@ -10,7 +10,10 @@
       "type": "string"
     },
     "availableSlots": {
-      "type": ["integer", "string"]
+      "type": [
+        "integer",
+        "string"
+      ]
     }
   },
   "required": [

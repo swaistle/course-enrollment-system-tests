@@ -22,7 +22,7 @@ class SearchByAvailabilityTests {
     String actualCourseCode;
 
     @BeforeEach
-    void setUp(){
+    void setUp() {
         Response response = addCourseRequest.createCourse();
 
         response.then()
@@ -39,7 +39,7 @@ class SearchByAvailabilityTests {
     }
 
     @Test
-    void assertSearchByAvailabilityStatus(){
+    void assertSearchByAvailabilityStatus() {
         Response response = searchCourseRequest.searchByAvailability(actualCourseCode);
 
         response.then()
@@ -48,7 +48,7 @@ class SearchByAvailabilityTests {
     }
 
     @Test
-    void assertSearchByAvailabilitySchema(){
+    void assertSearchByAvailabilitySchema() {
         Response response = searchCourseRequest.searchByAvailability(actualCourseCode);
 
         response.then()

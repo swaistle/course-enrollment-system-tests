@@ -13,15 +13,13 @@ import static ces.utils.Helper.*;
 
 public class EnrolCourseRequest {
 
-    private final Logger log = LoggerFactory.getLogger(EnrolCourseRequest.class);
-
     final String role = "student";
-    JSONObject payload;
     final String appPath = HOST + ENROLLMENTS_CONTEXT_PATH;
-
+    private final Logger log = LoggerFactory.getLogger(EnrolCourseRequest.class);
+    JSONObject payload;
     BearerTokenGenerator bearerTokenGenerator = new BearerTokenGenerator();
 
-    public Response enrolCourse(String studentId, String courseCode){
+    public Response enrolCourse(String studentId, String courseCode) {
         RequestSpecification request = RestAssured.given();
         final String accessToken = bearerTokenGenerator.extractBearerToken(role);
 
@@ -41,7 +39,7 @@ public class EnrolCourseRequest {
                 .post(appUrl);
     }
 
-    public Response dropCourse(String studentId, String courseCode){
+    public Response dropCourse(String studentId, String courseCode) {
         RequestSpecification request = RestAssured.given();
         final String accessToken = bearerTokenGenerator.extractBearerToken(role);
 
@@ -61,7 +59,7 @@ public class EnrolCourseRequest {
                 .post(appUrl);
     }
 
-    public Response viewHistory(String role, String studentId){
+    public Response viewHistory(String role, String studentId) {
         RequestSpecification request = RestAssured.given();
         final String accessToken = bearerTokenGenerator.extractBearerToken(role);
 
@@ -80,7 +78,7 @@ public class EnrolCourseRequest {
                 .post(appUrl);
     }
 
-    public Response viewActiveCourses(String role, String studentId){
+    public Response viewActiveCourses(String role, String studentId) {
         RequestSpecification request = RestAssured.given();
         final String accessToken = bearerTokenGenerator.extractBearerToken(role);
 

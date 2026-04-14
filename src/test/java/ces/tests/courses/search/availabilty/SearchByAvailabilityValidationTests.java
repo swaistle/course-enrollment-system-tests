@@ -12,10 +12,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class SearchByAvailabilityValidationTests {
 
-  SearchCourseRequest searchCourseRequest = new SearchCourseRequest();
+    SearchCourseRequest searchCourseRequest = new SearchCourseRequest();
 
     @Test
-    void assertNotFound(){
+    void assertNotFound() {
         Response response = searchCourseRequest.searchByAvailability("NoResults");
 
         String responseMessage = response.then()

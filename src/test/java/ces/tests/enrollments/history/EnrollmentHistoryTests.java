@@ -14,7 +14,7 @@ class EnrollmentHistoryTests {
     String role = "student";
 
     @Test
-    void assertStudentViewHistoryStatus(){
+    void assertStudentViewHistoryStatus() {
         Response response = enrolCourseRequest.viewHistory(role, studentId);
 
         response.then()
@@ -23,7 +23,7 @@ class EnrollmentHistoryTests {
     }
 
     @Test
-    void assertInstructorViewHistoryStatus(){
+    void assertInstructorViewHistoryStatus() {
         Response response = enrolCourseRequest.viewHistory("instructor", studentId);
 
         response.then()
@@ -32,7 +32,7 @@ class EnrollmentHistoryTests {
     }
 
     @Test
-    void assertViewHistorySchema(){
+    void assertViewHistorySchema() {
         Response response = enrolCourseRequest.viewHistory(role, studentId);
 
         response.then()

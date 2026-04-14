@@ -20,21 +20,20 @@ public class BaseSetUp {
     String courseCode;
     int availableSlots;
 
-    public String generateCourseCode(){
+    public String generateCourseCode() {
         ThreadLocalRandom random = ThreadLocalRandom.current();
-        int randomInt = random.nextInt(1,999);
+        int randomInt = random.nextInt(1, 999);
         String generatedCode;
-        generatedCode = "TST"+ CANDIDATE_ID + "_" + randomInt;
+        generatedCode = "TST" + CANDIDATE_ID + "_" + randomInt;
         return generatedCode;
     }
 
-    public String generateDate(int months){
+    public String generateDate(int months) {
         LocalDate localDate = LocalDate.now();
 
         if (months != 0) {
             return localDate.plusMonths(months).toString();
-        }
-        else {
+        } else {
             return localDate.toString();
         }
     }
@@ -63,7 +62,7 @@ public class BaseSetUp {
         return availableSlots;
     }
 
-    public JSONObject generateDefaultPayload(){
+    public JSONObject generateDefaultPayload() {
         String instructorId = "instructor_" + CANDIDATE_ID + CANDIDATE_ID;
         String newTitle = instructorId + "'s course";
 
@@ -80,7 +79,7 @@ public class BaseSetUp {
         return generatedPayload;
     }
 
-    public void setCourseCode(JSONObject generatedPayload){
+    public void setCourseCode(JSONObject generatedPayload) {
         courseCode = generatedPayload.get("courseCode").toString();
         log.debug("Setting up course test data with courseCode: {}", courseCode);
     }

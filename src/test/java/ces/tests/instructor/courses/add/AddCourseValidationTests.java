@@ -1,6 +1,7 @@
 package ces.tests.instructor.courses.add;
 
-import ces.utils.*;
+import ces.utils.BaseSetUp;
+import ces.utils.BearerTokenGenerator;
 import ces.utils.courses.AddCoursePayloadBuilder;
 import ces.utils.courses.AddCourseRequest;
 import ces.utils.courses.DeleteCourseRequest;
@@ -17,13 +18,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class AddCourseValidationTests {
 
+    final String appUrl = HOST + COURSE_CONTEXT_PATH;
     private final Logger log = LoggerFactory.getLogger(AddCourseValidationTests.class);
-
     BaseSetUp baseSetUp = new BaseSetUp();
     BearerTokenGenerator bearerTokenGenerator = new BearerTokenGenerator();
     AddCourseRequest addCourseRequest = new AddCourseRequest();
     DeleteCourseRequest deleteCourseRequest = new DeleteCourseRequest();
-    final String appUrl = HOST + COURSE_CONTEXT_PATH;
     String instructorId = "instructor_" + CANDIDATE_ID + CANDIDATE_ID;
     String newTitle = instructorId + "'s course";
 
@@ -51,7 +51,7 @@ class AddCourseValidationTests {
     }
 
     @Test
-    void assertExistingCourseCode(){
+    void assertExistingCourseCode() {
         Response courseSetup = addCourseRequest.createCourse();
         String actualCourseId = baseSetUp.extractCourseId(courseSetup);
 

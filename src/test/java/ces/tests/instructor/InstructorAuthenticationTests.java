@@ -1,8 +1,7 @@
 package ces.tests.instructor;
 
-import io.restassured.response.Response;
-
 import ces.utils.BearerTokenGenerator;
+import io.restassured.response.Response;
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;

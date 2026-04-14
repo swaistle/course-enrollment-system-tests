@@ -17,16 +17,13 @@ import static ces.utils.Helper.HOST;
 public class AddCourseRequest {
 
     final String role = "instructor";
-    private final Logger log = LoggerFactory.getLogger(AddCourseRequest.class);
-
-    JSONObject payload;
     final String appUrl = HOST + COURSE_CONTEXT_PATH;
-
-
+    private final Logger log = LoggerFactory.getLogger(AddCourseRequest.class);
+    JSONObject payload;
     BaseSetUp baseSetUp = new BaseSetUp();
     BearerTokenGenerator bearerTokenGenerator = new BearerTokenGenerator();
 
-    public Response createCourse(){
+    public Response createCourse() {
         RequestSpecification request = RestAssured.given();
 
         final String accessToken = bearerTokenGenerator.extractBearerToken(role);
@@ -43,7 +40,7 @@ public class AddCourseRequest {
                 .post(appUrl);
     }
 
-    public Response createCourse(JSONObject newPayload){
+    public Response createCourse(JSONObject newPayload) {
         RequestSpecification request = RestAssured.given();
 
         final String accessToken = bearerTokenGenerator.extractBearerToken(role);

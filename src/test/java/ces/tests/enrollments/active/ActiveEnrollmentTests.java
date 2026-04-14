@@ -14,7 +14,7 @@ class ActiveEnrollmentTests {
     String role = "student";
 
     @Test
-    void assertStudentViewActiveCoursesStatus(){
+    void assertStudentViewActiveCoursesStatus() {
         Response response = enrolCourseRequest.viewActiveCourses(role, studentId);
 
         response.then()
@@ -23,7 +23,7 @@ class ActiveEnrollmentTests {
     }
 
     @Test
-    void assertInstructorViewActiveCoursesStatus(){
+    void assertInstructorViewActiveCoursesStatus() {
         Response response = enrolCourseRequest.viewActiveCourses("instructor", studentId);
 
         response.then()
@@ -32,7 +32,7 @@ class ActiveEnrollmentTests {
     }
 
     @Test
-    void assertViewActiveCoursesAllSchema(){
+    void assertViewActiveCoursesAllSchema() {
         Response response = enrolCourseRequest.viewActiveCourses(role, studentId);
 
         response.then()

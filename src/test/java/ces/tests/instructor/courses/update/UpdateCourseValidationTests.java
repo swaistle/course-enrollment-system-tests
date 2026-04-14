@@ -1,8 +1,8 @@
 package ces.tests.instructor.courses.update;
 
+import ces.utils.BaseSetUp;
 import ces.utils.BearerTokenGenerator;
 import ces.utils.courses.AddCourseRequest;
-import ces.utils.BaseSetUp;
 import ces.utils.courses.DeleteCourseRequest;
 import ces.utils.courses.UpdateCourseRequest;
 import io.restassured.RestAssured;
@@ -25,7 +25,7 @@ class UpdateCourseValidationTests {
     BearerTokenGenerator bearerTokenGenerator = new BearerTokenGenerator();
 
     @Test
-    void assetNotFound(){
+    void assetNotFound() {
         String appUrl = HOST + COURSE_CONTEXT_PATH + "/000000000000000000000000";
         final String accessToken = bearerTokenGenerator.extractBearerToken("instructor");
 
@@ -52,7 +52,7 @@ class UpdateCourseValidationTests {
         String actualCourseId;
 
         @BeforeEach
-        void setUp(){
+        void setUp() {
             Response response = addCourseRequest.createCourse();
 
             response.then()
@@ -68,7 +68,7 @@ class UpdateCourseValidationTests {
         }
 
         @Test
-        void assertBadRequest(){
+        void assertBadRequest() {
             Response updateCourseResponse = updateCourseRequest.updateCourseRequest(actualCourseId, "~");
 
             String htmlResponse = updateCourseResponse.then()
